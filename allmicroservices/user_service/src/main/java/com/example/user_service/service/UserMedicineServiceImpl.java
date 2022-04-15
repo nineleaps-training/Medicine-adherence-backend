@@ -49,7 +49,7 @@ public class UserMedicineServiceImpl implements UserMedicineService{
         UserMedicines userMedicines1 = userMedicineRepository.save(userMedicines);
         if(userMedicines1.getMedicineName() == null)
         {
-            throw new UserMedicineException("Error try again!");
+            throw new UserMedicineException("Not found");
         }
         return userMedicines1;
     }
@@ -62,7 +62,7 @@ public class UserMedicineServiceImpl implements UserMedicineService{
                 .findById(medicineId);
         if(userMedicines.isEmpty())
         {
-            throw new UserMedicineException("Medicine not found");
+            throw new UserMedicineException("Not found");
         }
         userMedicineRepository.save(userMedicines.get());
 
@@ -98,7 +98,7 @@ public class UserMedicineServiceImpl implements UserMedicineService{
         UserMedicines userMeds1 = userMedicineRepository.save(userMeds.get());
         if(userMeds1.getMedicineName() == null)
         {
-            throw new UserMedicineException("Error try again!");
+            throw new UserMedicineException("Not found");
         }
         return userMeds1;
     }
