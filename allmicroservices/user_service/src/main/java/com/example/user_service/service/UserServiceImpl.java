@@ -126,7 +126,6 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public UserEntity getUserByEmail(String email) throws UserexceptionMessage {
-
         return userRepository.findBymail(email);
     }
 

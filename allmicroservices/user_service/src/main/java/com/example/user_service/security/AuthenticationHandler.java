@@ -47,7 +47,6 @@ public class AuthenticationHandler implements HandlerInterceptor {
 
         if (username != null) {
             try {
-
                 UserDetails userDetails = userDetailService.loadUserByUsername(id);
                 if (Boolean.FALSE.equals(jwtUtil.validateToken(jwt.trim(), userDetails,request))) {
                     if (request.getAttribute("expired").equals("true")) {
