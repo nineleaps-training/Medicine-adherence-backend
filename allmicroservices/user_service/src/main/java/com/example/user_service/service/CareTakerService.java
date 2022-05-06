@@ -28,4 +28,4 @@ public interface CareTakerService {
 
     boolean sendImageToCaretaker(MultipartFile multipartFile , String filename , String caretakerId , String medName, Integer medId) throws IOException , UserCaretakerException;
 }
-//
+///
