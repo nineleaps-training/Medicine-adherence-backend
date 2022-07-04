@@ -1,14 +1,13 @@
 package com.example.user_service.config;
 
-import com.example.user_service.model.MedicineHistory;
-import com.example.user_service.model.UserDetails;
-import com.example.user_service.model.UserEntity;
-import com.example.user_service.model.UserMedicines;
+import com.example.user_service.model.medicine.MedicineHistory;
+import com.example.user_service.model.user.UserDetails;
+import com.example.user_service.model.user.UserEntity;
+import com.example.user_service.model.medicine.UserMedicines;
 import com.itextpdf.html2pdf.HtmlConverter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Component;
 
 import java.io.FileNotFoundException;
@@ -20,8 +19,6 @@ import java.util.UUID;
 @Component
 public class PdfMailSender {
 
-    @Autowired
-    private JavaMailSender javaMailSender;
     Logger logger = LoggerFactory.getLogger(PdfMailSender.class);
 
 
@@ -41,7 +38,7 @@ public class PdfMailSender {
                 "                 <div>Name - "+userEntity.getUserName()+"</div>\n" +
                 "                 <div>Age - "+userDetails.getAge()+"</div>\n" +
                 "                 <div>Blood Group - "+userDetails.getBloodGroup()+"</div>      \n" +
-                "                  <div>Marital Status - Unmarried</div>\n" +
+                "                  <div>Marital Status - "+userDetails.getMartialStatus()+"</div>\n" +
                 "                  <div>Gender - "+userDetails.getGender()+"</div>\n" +
                 "                  <div>Contact - "+userDetails.getUserContact()+"</div>\n" +
                 "            </div><br>\n" +
@@ -75,6 +72,7 @@ public class PdfMailSender {
             HtmlConverter.convertToPdf(HTML[0], new FileOutputStream(System.getProperty("user.dir") + "/src/main/upload/static/pdf/" + filepath[0] + ".pdf"));
             return filepath[0];
         } catch (FileNotFoundException e) {
+            logger.info(e.getMessage());
             throw new RuntimeException(e);
         }
 

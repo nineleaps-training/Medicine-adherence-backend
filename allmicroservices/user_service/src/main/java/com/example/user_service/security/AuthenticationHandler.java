@@ -1,7 +1,7 @@
 package com.example.user_service.security;
 
 import com.example.user_service.config.filter.UserDetailService;
-import com.example.user_service.repository.UserRepository;
+import com.example.user_service.repository.user.UserRepository;
 import com.example.user_service.util.JwtUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

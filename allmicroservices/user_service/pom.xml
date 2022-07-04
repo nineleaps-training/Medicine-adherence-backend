@@ -17,10 +17,14 @@
 		<java.version>11</java.version>
 	</properties>
 	<dependencies>
+
+<!--		used for building restful application-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+
+<!--		used for adding swagger for api documentation-->
 		<dependency>
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-swagger2</artifactId>
@@ -32,33 +36,45 @@
 			<artifactId>springfox-swagger-ui</artifactId>
 			<version>2.9.2</version>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-mail</artifactId>
-			<version>2.5.6</version>
-		</dependency>
+
+<!--		used for doing validation -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-validation</artifactId>
 		</dependency>
+
+<!--		orm for relational data  -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
+
+<!--		use for making api calls-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-webflux</artifactId>
+		</dependency>
+
+<!--		use to remove boilerplate code -->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
 		</dependency>
+
+<!--		used for communication with message broker (rabbitmq) -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-amqp</artifactId>
 		</dependency>
+
+<!--		used for making connection to sql database-->
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -70,12 +86,14 @@
 			<scope>test</scope>
 		</dependency>
 
+<!--		used for implementing jwt-->
 		<dependency>
 			<groupId>io.jsonwebtoken</groupId>
 			<artifactId>jjwt</artifactId>
 			<version>0.9.1</version>
 		</dependency>
 
+<!--		used for mapping different objects-->
 		<dependency>
 			<groupId>org.modelmapper</groupId>
 			<artifactId>modelmapper</artifactId>
@@ -87,16 +105,11 @@
 			<artifactId>spring-boot-starter-batch</artifactId>
 		</dependency>
 
+<!--		used for checking health of apis-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-aop</artifactId>
-
-		</dependency>
-
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -104,6 +117,7 @@
 			<scope>test</scope>
 		</dependency>
 
+<!--		used for generating pdf from html-->
 		<dependency>
 			<groupId>com.itextpdf</groupId>
 			<artifactId>html2pdf</artifactId>
