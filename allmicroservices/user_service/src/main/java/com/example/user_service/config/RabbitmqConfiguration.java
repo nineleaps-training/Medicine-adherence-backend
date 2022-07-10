@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 
 @Configuration
 public class RabbitmqConfiguration {
@@ -33,37 +34,44 @@ public class RabbitmqConfiguration {
 
 
     @Bean(name = "queue1")
+    @Profile("dev")
     public Queue getMailQueue(){
     return new Queue(queueName);
 }
 //
     @Bean(name = "queue2")
+    @Profile("dev")
     public Queue getNotificationQueue(){
         return new Queue(queue2Name);
     }
 
 
     @Bean
+    @Profile("dev")
     public TopicExchange getTopicExchange(){
         return new TopicExchange(topicExchange);
     }
 
     @Bean(name = "bind1")
+    @Profile("dev")
     Binding binding1(@Qualifier("queue1") Queue queue, TopicExchange exchange) {
         return BindingBuilder.bind(queue).to(exchange).with(routingKey);
     }
 
     @Bean(name = "bind2")
+    @Profile("dev")
     Binding binding2(@Qualifier("queue2") Queue queue, TopicExchange exchange) {
         return BindingBuilder.bind(queue).to(exchange).with(routingKey2);
     }
 
     @Bean
+    @Profile("dev")
     public Jackson2JsonMessageConverter jsonMessageConverter() {
         return new Jackson2JsonMessageConverter();
     }
 
     @Bean
+    @Profile("dev")
     public AmqpTemplate rabbitTemplate(ConnectionFactory connectionFactory) {
         RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory);
         rabbitTemplate.setMessageConverter(jsonMessageConverter());

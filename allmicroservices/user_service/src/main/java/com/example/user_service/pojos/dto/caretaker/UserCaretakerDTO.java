@@ -30,14 +30,11 @@ public class UserCaretakerDTO {
     private String patientId;
 
     @NotNull(message = "Caretaker name should be present")
-    @NotBlank
+    @NotBlank(message = "CaretTakerName should not be Empty")
     private String caretakerUsername;
-
-    private String createdAt;
 
     @NotNull
     @NotBlank
     private String sentBy;
 
 }
-//

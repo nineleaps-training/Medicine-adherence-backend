@@ -13,8 +13,7 @@ public class MedicineHistoryDTO {
     private int remId;
     private String date;
     private String[] taken;
-    private String[] not_taken;
+    private String[] notTaken;
 
 
 }
-//

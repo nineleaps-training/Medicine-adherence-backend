@@ -7,10 +7,7 @@ import com.example.user_service.pojos.response.image.ImagesResponse;
 import com.example.user_service.pojos.response.medicine.MedicineResponse;
 import com.example.user_service.pojos.response.medicine.SyncMedicineHistoryResponse;
 import com.example.user_service.pojos.response.sync.SyncResponse;
-import com.example.user_service.repository.medicine.UserMedicineRepository;
-import com.example.user_service.repository.user.UserRepository;
 import com.example.user_service.service.medicine.UserMedicineService;
-import com.example.user_service.util.Messages;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -26,14 +23,10 @@ import java.util.List;
 public class MedicineController {
 
     private final UserMedicineService userMedicineService;
-    private final UserRepository userRepository;
-    private final UserMedicineRepository userMedicineRepository;
 
     // save caretaker for a patients
-    MedicineController(UserMedicineService userMedicineService, UserRepository userRepository, UserMedicineRepository userMedicineRepository) {
+    MedicineController(UserMedicineService userMedicineService) {
         this.userMedicineService = userMedicineService;
-        this.userMedicineRepository = userMedicineRepository;
-        this.userRepository = userRepository;
     }
 
     @PostMapping(value = "/medicines/sync", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -44,7 +37,6 @@ public class MedicineController {
     @PostMapping(value = "/medicine-history/sync")
     public ResponseEntity<SyncMedicineHistoryResponse> syncMedicineHistory(@RequestParam(name = "medId") Integer medId,
                                                                            @RequestBody List<MedicineHistoryDTO> medicineHistory) throws UserMedicineException {
-
         return new ResponseEntity<>(userMedicineService.syncMedicineHistory(medId, medicineHistory), HttpStatus.OK);
     }
 
@@ -54,7 +46,7 @@ public class MedicineController {
     }
 
     @GetMapping(value = "/medicine-images")
-    public ResponseEntity<ImagesResponse> getMedicineImages(@RequestParam(name = "medId") Integer medId) {
+    public ResponseEntity<ImagesResponse> getMedicineImages(@RequestParam(name = "medId") Integer medId) throws UserMedicineException {
         return new ResponseEntity<>(
                 userMedicineService.getUserMedicineImages(medId), HttpStatus.OK);
     }

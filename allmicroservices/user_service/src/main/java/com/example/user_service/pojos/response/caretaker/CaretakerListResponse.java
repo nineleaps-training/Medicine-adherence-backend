@@ -1,7 +1,5 @@
 package com.example.user_service.pojos.response.caretaker;
 
-
-import com.example.user_service.model.user.UserCaretaker;
 import com.example.user_service.pojos.dto.caretaker.MyCaretakerDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;

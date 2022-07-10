@@ -25,10 +25,6 @@ public interface CareTakerService {
 
      CaretakerListResponse getMyCaretakers(String userId,Integer pageNo,Integer pageSize) throws UserCaretakerException;
 
-     List<UserCaretaker> getCaretakerRequestStatus(String userId);
-
-     List<UserCaretaker> getCaretakerRequestsP(String userId) throws UserCaretakerException;
-
      PatientRequestResponse delPatientReq(String cId);
 
      SendImageResponse sendImageToCaretaker(MultipartFile multipartFile , String filename , String caretakerId , String medName, Integer medId) throws IOException , UserCaretakerException;

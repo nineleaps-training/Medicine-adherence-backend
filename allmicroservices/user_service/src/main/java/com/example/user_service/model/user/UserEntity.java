@@ -2,7 +2,6 @@ package com.example.user_service.model.user;
 
 
 import com.example.user_service.model.medicine.UserMedicines;
-import com.example.user_service.model.user.UserDetails;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,6 +9,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
@@ -37,10 +37,10 @@ public class UserEntity {
     private String email;
 
     @Column(name = "last_login", nullable = false)
-    private String lastLogin;
+    private LocalDateTime lastLogin;
 
     @Column(name = "created_at", nullable = false)
-    private String createdAt;
+    private LocalDateTime createdAt;
 
     @OneToOne(
             cascade = CascadeType.ALL,

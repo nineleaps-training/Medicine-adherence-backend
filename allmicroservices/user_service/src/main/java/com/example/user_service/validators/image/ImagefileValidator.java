@@ -20,7 +20,7 @@ public class ImagefileValidator implements ConstraintValidator<ImageValidator, M
             return false;
         }
         String fileType = multipartFile.getContentType();
-        if (!(fileType.equals("image/jpg") ||
+        if (fileType!=null && !(fileType.equals("image/jpg") ||
                 fileType.equals("image/png") ||
                 fileType.equals("image/jpeg"))) {
             constraintValidatorContext.disableDefaultConstraintViolation();

@@ -14,7 +14,6 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
-import org.springframework.web.multipart.MultipartException;
 
 
 import javax.validation.ConstraintViolationException;
@@ -29,7 +28,6 @@ public class GlobalExceptionHandler {
     /**
      * Returns user exception response
      */
-    Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
     @ExceptionHandler({UserExceptionMessage.class})
     public ResponseEntity<UserResponse> getuserException(UserExceptionMessage uem, WebRequest webRequest) {
         UserResponse userResponse = new UserResponse(Messages.FAILED, uem.getMessage(), null, "", "");
@@ -46,12 +44,7 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(caretakerResponse, HttpStatus.NOT_FOUND);
 
     }
-    @ExceptionHandler({MethodArgumentNotValidException.class})
-    public ResponseEntity<CaretakerResponse> getcaretakernotvalidexception(MethodArgumentNotValidException uce, WebRequest webRequest) {
-        CaretakerResponse caretakerResponse = new CaretakerResponse(Messages.FAILED, uce.getFieldError().getDefaultMessage(), null);
-        return new ResponseEntity<>(caretakerResponse, HttpStatus.NOT_FOUND);
 
-    }
     @ExceptionHandler({ConstraintViolationException.class})
     public ResponseEntity<CaretakerResponse> getcaretakernotvalidexception(ConstraintViolationException uce, WebRequest webRequest) {
         CaretakerResponse caretakerResponse = new CaretakerResponse(Messages.FAILED, uce.getMessage(), null);

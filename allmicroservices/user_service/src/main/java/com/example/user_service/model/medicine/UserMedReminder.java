@@ -1,6 +1,6 @@
 package com.example.user_service.model.medicine;
 
-import com.example.user_service.model.medicine.UserMedicines;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;

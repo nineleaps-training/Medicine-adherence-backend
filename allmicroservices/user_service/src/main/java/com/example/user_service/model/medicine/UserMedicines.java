@@ -10,7 +10,6 @@ import org.hibernate.validator.constraints.Range;
 
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Data
@@ -79,4 +78,4 @@ public class UserMedicines {
     private List<Image> images;
 
 }
-////
+

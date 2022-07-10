@@ -1,7 +1,7 @@
 package com.example.user_service.util;
 
 public class Messages {
-
+private Messages(){}
     public static final String DATA_NOT_FOUND = "Data not found";
     public static final String DATA_FOUND = "Data found";
     public static final String REQ_SENT_SUCCESS = "Request sent successfully";
@@ -28,5 +28,7 @@ public class Messages {
     public static final String PDF_SUCCESS = "Pdf craeted successfully";
     public static final String SYNCED_MEDICINE_HISTORY = "Medicine History Synced Successfully";
     public static final String SYNCED_MEDICINE = "Medicine Synced Successfully";
-    public static final String MAIL_SENT_SUCCESSFULLY = "Imae sent to user";
+    public static final String MAIL_SENT_SUCCESSFULLY = "Mail sent to user";
+    public static final String Image_Sent_Successfully = "IMAGE_SENT";
+    public static final String UNABLE_TO_SYNC = "UNABLE_TO_SYNC";
 }

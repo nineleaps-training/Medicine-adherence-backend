@@ -1,8 +1,6 @@
 package com.example.user_service.controller.caretaker;
 
 import com.example.user_service.exception.UserCaretakerException;
-
-import com.example.user_service.model.user.UserCaretaker;
 import com.example.user_service.pojos.Notificationmessage;
 import com.example.user_service.pojos.dto.caretaker.SendImageDto;
 import com.example.user_service.pojos.dto.caretaker.UserCaretakerDTO;
@@ -12,7 +10,6 @@ import com.example.user_service.pojos.response.image.SendImageResponse;
 import com.example.user_service.pojos.response.patient.PatientRequestResponse;
 import com.example.user_service.pojos.response.patient.PatientResponse;
 import com.example.user_service.service.caretaker.CareTakerService;
-import com.example.user_service.service.user.UserService;
 import com.example.user_service.util.Messages;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Value;
@@ -28,6 +25,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.IOException;
+import java.util.Objects;
+import java.util.Optional;
 
 
 @RestController
@@ -36,7 +35,6 @@ import java.io.IOException;
 public class CaretakerController {
 
     private final CareTakerService careTakerService;
-    private final UserService userService;
     private final RabbitTemplate rabbitTemplate;
 
     @Value("${project.rabbitmq.exchange}")
@@ -45,17 +43,18 @@ public class CaretakerController {
     private String routingKey2;
 
 
-    public CaretakerController(CareTakerService careTakerService, UserService userService,RabbitTemplate rabbitTemplate) {
+    public CaretakerController(CareTakerService careTakerService, RabbitTemplate rabbitTemplate) {
         this.careTakerService = careTakerService;
-        this.userService = userService;
         this.rabbitTemplate = rabbitTemplate;
     }
 
     // save caretaker for a patients
     @PostMapping(value = "/request", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<CaretakerResponse> saveCaretaker(@Valid @RequestBody UserCaretakerDTO userCaretakerDTO , BindingResult bindingResult) throws UserCaretakerException {
+
         if(bindingResult.hasErrors()){
-            return new ResponseEntity<>(new CaretakerResponse(Messages.FAILED,bindingResult.getFieldError().getDefaultMessage(),null),HttpStatus.NOT_ACCEPTABLE);
+
+            return new ResponseEntity<>(new CaretakerResponse(Messages.FAILED,  Objects.requireNonNull(bindingResult.getFieldError()).getDefaultMessage(),null),HttpStatus.NOT_ACCEPTABLE);
         }
         return new ResponseEntity<>(careTakerService.saveCareTaker(userCaretakerDTO), HttpStatus.OK);
     }
@@ -120,7 +119,7 @@ public class CaretakerController {
     }
 
     @PostMapping(value = "/image")
-    @Transactional(timeout = 10000)
+    @Transactional(timeout = 10)
     public ResponseEntity<SendImageResponse> sendImageToCaretaker(@Valid @ModelAttribute SendImageDto sendImageDto , BindingResult bindingResult) throws IOException, UserCaretakerException {
         if(bindingResult.hasErrors()){
             return new ResponseEntity<>(new SendImageResponse(Messages.FAILED,bindingResult.getFieldError().getDefaultMessage()),HttpStatus.NOT_ACCEPTABLE);

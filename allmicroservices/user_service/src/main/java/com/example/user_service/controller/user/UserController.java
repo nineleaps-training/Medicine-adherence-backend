@@ -1,6 +1,7 @@
 package com.example.user_service.controller.user;
 
 
+import com.example.user_service.config.log.Logger;
 import com.example.user_service.exception.GoogleSsoException;
 import com.example.user_service.exception.UserExceptionMessage;
 import com.example.user_service.exception.UserMedicineException;
@@ -15,7 +16,6 @@ import com.example.user_service.pojos.response.medicine.PdfLinkResponse;
 import com.example.user_service.pojos.response.user.UserMailResponse;
 import com.example.user_service.pojos.response.user.UserProfileResponse;
 import com.example.user_service.pojos.response.user.UserResponse;
-import com.example.user_service.service.medicine.UserMedicineService;
 import com.example.user_service.service.user.UserService;
 import com.example.user_service.util.JwtUtil;
 import com.example.user_service.util.Messages;
@@ -23,7 +23,6 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -42,13 +41,9 @@ public class UserController {
     private final UserService userService;
     private final RabbitTemplate rabbitTemplate;
     private final JwtUtil jwtUtil;
-    private final PasswordEncoder passwordEncoder;
-    private final UserMedicineService userMedicineService;
 
-    UserController(UserService userService, UserMedicineService userMedicineService, PasswordEncoder passwordEncoder, JwtUtil jwtUtil, RabbitTemplate rabbitTemplate) {
-        this.userMedicineService = userMedicineService;
+    UserController(UserService userService, JwtUtil jwtUtil, RabbitTemplate rabbitTemplate) {
         this.jwtUtil = jwtUtil;
-        this.passwordEncoder = passwordEncoder;
         this.userService = userService;
         this.rabbitTemplate = rabbitTemplate;
     }
@@ -64,6 +59,9 @@ public class UserController {
     @PostMapping("/refreshToken")
     public ResponseEntity<RefreshTokenResponse> refreshToken(@Valid @RequestParam(name = "uid") String uid, HttpServletRequest httpServletRequest) throws UserExceptionMessage, UserMedicineException, ExecutionException, InterruptedException {
         String token = httpServletRequest.getHeader("Authorization").substring(7);
+        if(!token.equals("")){
+            Logger.infoLog("",token);
+        }
         String jwtToken = jwtUtil.generateToken(userService.getUserById(uid).getUserName());
         return new ResponseEntity<>(new RefreshTokenResponse(Messages.SUCCESS, jwtToken), HttpStatus.CREATED);
     }
@@ -103,7 +101,7 @@ public class UserController {
 
 
     @GetMapping(value = "/pdf")
-    public ResponseEntity<PdfLinkResponse> sendPdf(@RequestParam(name = "medId") Integer medId) throws IOException {
+    public ResponseEntity<PdfLinkResponse> sendPdf(@RequestParam(name = "medId") Integer medId) throws IOException, UserExceptionMessage {
         PdfLinkResponse filePath = userService.sendUserMedicines(medId);
         return new ResponseEntity<>(filePath, HttpStatus.OK);
     }
