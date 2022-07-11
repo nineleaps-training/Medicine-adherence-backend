@@ -26,7 +26,6 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.IOException;
 import java.util.Objects;
-import java.util.Optional;
 
 
 @RestController
@@ -64,7 +63,7 @@ public class CaretakerController {
     public ResponseEntity<CaretakerResponse> updateCaretakerStatus(@NotNull @NotBlank @RequestParam(name = "cId") String cId ,  BindingResult bindingResult)
             throws UserCaretakerException {
         if(bindingResult.hasErrors()){
-            return new ResponseEntity<>(new CaretakerResponse(Messages.FAILED,bindingResult.getFieldError().getDefaultMessage(),null),HttpStatus.NOT_ACCEPTABLE);
+            return new ResponseEntity<>(new CaretakerResponse(Messages.FAILED,Objects.requireNonNull(bindingResult.getFieldError()).getDefaultMessage(),null),HttpStatus.NOT_ACCEPTABLE);
         }
         return new ResponseEntity<>(careTakerService.updateCaretakerStatus(cId), HttpStatus.OK);
     }
@@ -76,8 +75,8 @@ public class CaretakerController {
                                                             , @NotNull @NotBlank Integer pageNo , @NotNull @NotBlank Integer pageSize
                                                             , BindingResult bindingResult)
             throws UserCaretakerException {
-        if(bindingResult.hasErrors()){
-            return new ResponseEntity<>(new PatientResponse(Messages.FAILED,bindingResult.getFieldError().getDefaultMessage(),null),HttpStatus.NOT_ACCEPTABLE);
+        if(bindingResult!=null && bindingResult.hasErrors()){
+            return new ResponseEntity<>(new PatientResponse(Messages.FAILED,Objects.requireNonNull(bindingResult.getFieldError()).getDefaultMessage(),null),HttpStatus.NOT_ACCEPTABLE);
         }
         return new ResponseEntity<>(careTakerService.getPatientsUnderMe(userId,pageNo,pageSize), HttpStatus.OK);
     }
@@ -88,7 +87,7 @@ public class CaretakerController {
                                                               ,@RequestParam(name = "pageNo") Integer pageNo,@RequestParam(name = "pageSize") Integer pageSize
                                                               ,BindingResult bindingResult) throws UserCaretakerException {
         if(bindingResult.hasErrors()){
-            return new ResponseEntity<>(new PatientResponse(Messages.FAILED,bindingResult.getFieldError().getDefaultMessage(),null),HttpStatus.NOT_ACCEPTABLE);
+            return new ResponseEntity<>(new PatientResponse(Messages.FAILED,Objects.requireNonNull(bindingResult.getFieldError()).getDefaultMessage(),null),HttpStatus.NOT_ACCEPTABLE);
         }
         return new ResponseEntity<>(careTakerService.getPatientRequests(userId,pageNo,pageSize), HttpStatus.OK);
 
@@ -104,7 +103,7 @@ public class CaretakerController {
     @GetMapping(value = "/delete")
     public ResponseEntity<PatientRequestResponse> delPatientReq(@NotNull @NotBlank @RequestParam(name = "cId") String cId , BindingResult bindingResult) {
         if(bindingResult.hasErrors()){
-            return new ResponseEntity<>(new PatientRequestResponse(Messages.FAILED,bindingResult.getFieldError().getDefaultMessage()),HttpStatus.NOT_ACCEPTABLE);
+            return new ResponseEntity<>(new PatientRequestResponse(Messages.FAILED,Objects.requireNonNull(bindingResult.getFieldError()).getDefaultMessage()),HttpStatus.NOT_ACCEPTABLE);
         }
         return new ResponseEntity<>(careTakerService.delPatientReq(cId), HttpStatus.OK);
     }
@@ -122,7 +121,7 @@ public class CaretakerController {
     @Transactional(timeout = 10)
     public ResponseEntity<SendImageResponse> sendImageToCaretaker(@Valid @ModelAttribute SendImageDto sendImageDto , BindingResult bindingResult) throws IOException, UserCaretakerException {
         if(bindingResult.hasErrors()){
-            return new ResponseEntity<>(new SendImageResponse(Messages.FAILED,bindingResult.getFieldError().getDefaultMessage()),HttpStatus.NOT_ACCEPTABLE);
+            return new ResponseEntity<>(new SendImageResponse(Messages.FAILED,Objects.requireNonNull(bindingResult.getFieldError()).getDefaultMessage()),HttpStatus.NOT_ACCEPTABLE);
         }
         SendImageResponse sendImageResponse = careTakerService.sendImageToCaretaker(sendImageDto.getImage(), sendImageDto.getName(), sendImageDto.getId(), sendImageDto.getMedName(), sendImageDto.getMedId());
         return new ResponseEntity<>(sendImageResponse, HttpStatus.OK);

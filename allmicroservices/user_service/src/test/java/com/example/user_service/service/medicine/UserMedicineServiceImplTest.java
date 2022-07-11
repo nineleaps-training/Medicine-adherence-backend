@@ -7,11 +7,13 @@ import com.example.user_service.model.medicine.MedicineHistory;
 import com.example.user_service.model.medicine.UserMedicines;
 import com.example.user_service.model.user.UserEntity;
 import com.example.user_service.pojos.dto.medicine.MedicineHistoryDTO;
+import com.example.user_service.pojos.dto.medicine.MedicinePojo;
 import com.example.user_service.pojos.response.image.ImagesResponse;
 import com.example.user_service.pojos.response.medicine.MedicineResponse;
 import com.example.user_service.pojos.response.medicine.SyncMedicineHistoryResponse;
 import com.example.user_service.pojos.response.medicine.SyncMedicineResponse;
 import com.example.user_service.pojos.response.medicine.UserMedicinesResponse;
+import com.example.user_service.pojos.response.sync.SyncResponse;
 import com.example.user_service.repository.image.ImageRepository;
 import com.example.user_service.repository.medicine.UserMedHistoryRepository;
 import com.example.user_service.repository.medicine.UserMedicineRepository;
@@ -53,90 +55,95 @@ class UserMedicineServiceImplTest {
     @Mock
     UserMedHistoryRepository userMedHistoryRepository;
     UserMedicineServiceImpl userMedicineService;
+
     @BeforeEach
-    void init(){
+    void init() {
         userMedicineService
-                 = new UserMedicineServiceImpl(userRepository,userMedicineRepository,imageRepository,userMedHistoryRepository);
+                = new UserMedicineServiceImpl(userRepository, userMedicineRepository, imageRepository, userMedHistoryRepository);
     }
 
     @Test
     void getallUserMedicinesStatus() throws UserExceptionMessage, UserMedicineException {
 
-        UserEntity userEntityTest = new UserEntity("erer4","Nikunj","nikkubisht12@gmail.com", LocalDateTime.now(),LocalDateTime.now(),null,null);
+        UserEntity userEntityTest = new UserEntity("erer4", "Nikunj", "nikkubisht12@gmail.com", LocalDateTime.now(), LocalDateTime.now(), null, null);
         when(userRepository.getUserById("1234")).thenReturn(userEntityTest);
         UserMedicinesResponse userMedicinesResponse = userMedicineService.getallUserMedicines("1234");
-        Assertions.assertEquals(Messages.SUCCESS,userMedicinesResponse.getStatus());
+        Assertions.assertEquals(Messages.SUCCESS, userMedicinesResponse.getStatus());
     }
 
     @Test
     void getallUserMedicinesMessage() throws UserExceptionMessage, UserMedicineException {
 
-        UserEntity userEntityTest = new UserEntity("erer4","Nikunj","nikkubisht12@gmail.com", LocalDateTime.now(),LocalDateTime.now(),null,null);
+        UserEntity userEntityTest = new UserEntity("erer4", "Nikunj", "nikkubisht12@gmail.com", LocalDateTime.now(), LocalDateTime.now(), null, null);
         when(userRepository.getUserById("1234")).thenReturn(userEntityTest);
         UserMedicinesResponse userMedicinesResponse = userMedicineService.getallUserMedicines("1234");
-        Assertions.assertEquals(Messages.DATA_FOUND,userMedicinesResponse.getMessage());
+        Assertions.assertEquals(Messages.DATA_FOUND, userMedicinesResponse.getMessage());
     }
 
     @Test
     void getallUserMedicinesException() throws UserExceptionMessage, UserMedicineException {
         when(userRepository.getUserById("1234")).thenReturn(null);
-       try{
-           UserMedicinesResponse userMedicinesResponse = userMedicineService.getallUserMedicines("1234");
+        try {
+            UserMedicinesResponse userMedicinesResponse = userMedicineService.getallUserMedicines("1234");
 
-       }catch (UserExceptionMessage userExceptionMessage){
-        Assertions.assertEquals(Messages.USER_NOT_FOUND, userExceptionMessage.getMessage());
-    }}
+        } catch (UserExceptionMessage userExceptionMessage) {
+            Assertions.assertEquals(Messages.USER_NOT_FOUND, userExceptionMessage.getMessage());
+        }
+    }
 
     @Test
     void getallUserMedicinesSQLException() throws UserExceptionMessage {
         when(userRepository.getUserById("1234")).thenThrow(JDBCConnectionException.class);
-        try{
+        try {
             UserMedicinesResponse userMedicinesResponse = userMedicineService.getallUserMedicines("1234");
-        }catch (UserMedicineException userExceptionMessage){
+        } catch (UserMedicineException userExceptionMessage) {
             Assertions.assertEquals(Messages.ERROR_TRY_AGAIN, userExceptionMessage.getMessage());
-        }}
+        }
+    }
 
 
     @Test
     void syncDataStatus() throws UserMedicineException {
-        UserEntity userEntityTest = new UserEntity("erer4","Nikunj","nikkubisht12@gmail.com", LocalDateTime.now(),LocalDateTime.now(),null,null);
-        List<UserMedicines> userMedicinesList = new ArrayList<>(Arrays.asList(new UserMedicines(1234,null,"Alli","Eat 200mg","Fri",null,"10:30","200mg",12,4,null,null,null)));
+        UserEntity userEntityTest = new UserEntity("erer4", "Nikunj", "nikkubisht12@gmail.com", LocalDateTime.now(), LocalDateTime.now(), null, null);
+        List<UserMedicines> userMedicinesList = new ArrayList<>(Arrays.asList(new UserMedicines(1234, null, "Alli", "Eat 200mg", "Fri", null, "10:30", "200mg", 12, 4, null, null, null)));
         when(userRepository.getUserById("1234")).thenReturn(userEntityTest);
-        when(userMedicineRepository.saveAll(userMedicinesList)).thenReturn(userMedicinesList); ;
-        SyncMedicineResponse syncMedicineResponse = userMedicineService.syncData("1234",userMedicinesList);
-        Assertions.assertEquals(Messages.SUCCESS,syncMedicineResponse.getStatus());
+        when(userMedicineRepository.saveAll(userMedicinesList)).thenReturn(userMedicinesList);
+        ;
+        SyncMedicineResponse syncMedicineResponse = userMedicineService.syncData("1234", userMedicinesList);
+        Assertions.assertEquals(Messages.SUCCESS, syncMedicineResponse.getStatus());
     }
 
     @Test
     void syncDataMessage() throws UserMedicineException {
-        UserEntity userEntityTest = new UserEntity("erer4","Nikunj","nikkubisht12@gmail.com", LocalDateTime.now(),LocalDateTime.now(),null,null);
-        List<UserMedicines> userMedicinesList = new ArrayList<>(Arrays.asList(new UserMedicines(1234,null,"Alli","Eat 200mg","Fri",null,"10:30","200mg",12,4,null,null,null)));
+        UserEntity userEntityTest = new UserEntity("erer4", "Nikunj", "nikkubisht12@gmail.com", LocalDateTime.now(), LocalDateTime.now(), null, null);
+        List<UserMedicines> userMedicinesList = new ArrayList<>(Arrays.asList(new UserMedicines(1234, null, "Alli", "Eat 200mg", "Fri", null, "10:30", "200mg", 12, 4, null, null, null)));
         when(userRepository.getUserById("1234")).thenReturn(userEntityTest);
-        when(userMedicineRepository.saveAll(userMedicinesList)).thenReturn(userMedicinesList); ;
-        SyncMedicineResponse syncMedicineResponse = userMedicineService.syncData("1234",userMedicinesList);
-        Assertions.assertEquals(Messages.SYNCED_MEDICINE,syncMedicineResponse.getMessage());
+        when(userMedicineRepository.saveAll(userMedicinesList)).thenReturn(userMedicinesList);
+        ;
+        SyncMedicineResponse syncMedicineResponse = userMedicineService.syncData("1234", userMedicinesList);
+        Assertions.assertEquals(Messages.SYNCED_MEDICINE, syncMedicineResponse.getMessage());
     }
 
     @Test
     void syncDataException() {
-        List<UserMedicines> userMedicinesList = new ArrayList<>(Arrays.asList(new UserMedicines(1234,null,"Alli","Eat 200mg","Fri",null,"10:30","200mg",12,4,null,null,null)));
+        List<UserMedicines> userMedicinesList = new ArrayList<>(Arrays.asList(new UserMedicines(1234, null, "Alli", "Eat 200mg", "Fri", null, "10:30", "200mg", 12, 4, null, null, null)));
         when(userRepository.getUserById("1234")).thenThrow(JDBCConnectionException.class);
-        try{
-            SyncMedicineResponse syncMedicineResponse = userMedicineService.syncData("1234",userMedicinesList);
-        }catch (UserMedicineException userMedicineException){
-            Assertions.assertEquals(Messages.ERROR_TRY_AGAIN,userMedicineException.getMessage());
+        try {
+            SyncMedicineResponse syncMedicineResponse = userMedicineService.syncData("1234", userMedicinesList);
+        } catch (UserMedicineException userMedicineException) {
+            Assertions.assertEquals(Messages.ERROR_TRY_AGAIN, userMedicineException.getMessage());
 
         }
     }
 
     @Test
     void syncDataUserException() {
-        List<UserMedicines> userMedicinesList = new ArrayList<>(Arrays.asList(new UserMedicines(1234,null,"Alli","Eat 200mg","Fri",null,"10:30","200mg",12,4,null,null,null)));
+        List<UserMedicines> userMedicinesList = new ArrayList<>(Arrays.asList(new UserMedicines(1234, null, "Alli", "Eat 200mg", "Fri", null, "10:30", "200mg", 12, 4, null, null, null)));
         when(userRepository.getUserById("1234")).thenReturn(null);
-        try{
-            SyncMedicineResponse syncMedicineResponse = userMedicineService.syncData("1234",userMedicinesList);
-        }catch (UserMedicineException userMedicineException){
-            Assertions.assertEquals(Messages.USER_NOT_FOUND,userMedicineException.getMessage());
+        try {
+            SyncMedicineResponse syncMedicineResponse = userMedicineService.syncData("1234", userMedicinesList);
+        } catch (UserMedicineException userMedicineException) {
+            Assertions.assertEquals(Messages.USER_NOT_FOUND, userMedicineException.getMessage());
 
         }
     }
@@ -145,64 +152,67 @@ class UserMedicineServiceImplTest {
     void syncMedicineHistory() throws UserMedicineException {
 
         UserMedicines userMedicines
-                 = new UserMedicines(1234,null,"Amif","200mg","FRI",null,"10:30","Eat 300mg",12,3,null,null,null);
+                = new UserMedicines(1234, null, "Amif", "200mg", "FRI", null, "10:30", "Eat 300mg", 12, 3, null, null, null);
 
-        List<MedicineHistoryDTO> medicineHistoryDTOList = new ArrayList<>(Arrays.asList(new MedicineHistoryDTO(123,null,new String[]{"10:30"},new String[]{"12:23"})));
+        List<MedicineHistoryDTO> medicineHistoryDTOList = new ArrayList<>(Arrays.asList(new MedicineHistoryDTO(123, null, new String[]{"10:30"}, new String[]{"12:23"})));
         when(userMedicineRepository.getMedById(1234)).thenReturn(userMedicines);
-        SyncMedicineHistoryResponse syncMedicineHistoryResponse = userMedicineService.syncMedicineHistory(1234,medicineHistoryDTOList);
-        Assertions.assertEquals(Messages.SUCCESS,syncMedicineHistoryResponse.getStatus());
+        SyncMedicineHistoryResponse syncMedicineHistoryResponse = userMedicineService.syncMedicineHistory(1234, medicineHistoryDTOList);
+        Assertions.assertEquals(Messages.SUCCESS, syncMedicineHistoryResponse.getStatus());
     }
+
     @Test
     void syncMedicineHistorySqlException() throws UserMedicineException {
 
         UserMedicines userMedicines
-                = new UserMedicines(1234,null,"Amif","200mg","FRI",null,"10:30","Eat 300mg",12,3,null,null,null);
+                = new UserMedicines(1234, null, "Amif", "200mg", "FRI", null, "10:30", "Eat 300mg", 12, 3, null, null, null);
 
-        List<MedicineHistoryDTO> medicineHistoryDTOList = new ArrayList<>(Arrays.asList(new MedicineHistoryDTO(123,null,new String[]{"10:30"},new String[]{"12:23"})));
+        List<MedicineHistoryDTO> medicineHistoryDTOList = new ArrayList<>(Arrays.asList(new MedicineHistoryDTO(123, null, new String[]{"10:30"}, new String[]{"12:23"})));
         when(userMedicineRepository.getMedById(1234)).thenThrow(JDBCConnectionException.class);
         try {
-            SyncMedicineHistoryResponse syncMedicineHistoryResponse = userMedicineService.syncMedicineHistory(1234,medicineHistoryDTOList);
+            SyncMedicineHistoryResponse syncMedicineHistoryResponse = userMedicineService.syncMedicineHistory(1234, medicineHistoryDTOList);
 
-        }catch (UserMedicineException userMedicineException){
-            Assertions.assertEquals(Messages.ERROR_TRY_AGAIN,userMedicineException.getMessage());
+        } catch (UserMedicineException userMedicineException) {
+            Assertions.assertEquals(Messages.ERROR_TRY_AGAIN, userMedicineException.getMessage());
 
         }
     }
+
     @Test
     void syncMedicineHistoryemptyException() throws UserMedicineException {
 
 
-        List<MedicineHistoryDTO> medicineHistoryDTOList = new ArrayList<>(Arrays.asList(new MedicineHistoryDTO(123,null,new String[]{"10:30"},new String[]{"12:23"})));
+        List<MedicineHistoryDTO> medicineHistoryDTOList = new ArrayList<>(Arrays.asList(new MedicineHistoryDTO(123, null, new String[]{"10:30"}, new String[]{"12:23"})));
         when(userMedicineRepository.getMedById(1234)).thenReturn(null);
         try {
-            SyncMedicineHistoryResponse syncMedicineHistoryResponse = userMedicineService.syncMedicineHistory(1234,medicineHistoryDTOList);
+            SyncMedicineHistoryResponse syncMedicineHistoryResponse = userMedicineService.syncMedicineHistory(1234, medicineHistoryDTOList);
 
-        }catch (UserMedicineException userMedicineException){
-            Assertions.assertEquals(Messages.UNABLE_TO_SYNC,userMedicineException.getMessage());
+        } catch (UserMedicineException userMedicineException) {
+            Assertions.assertEquals(Messages.UNABLE_TO_SYNC, userMedicineException.getMessage());
 
         }
     }
+
     @Test
     void getMedicineHistoryStatus() throws UserMedicineException {
-        List<MedicineHistory> medicineHistoryList = new ArrayList<>(Arrays.asList(new MedicineHistory(1234,null,"10:30","11:00",null)));
+        List<MedicineHistory> medicineHistoryList = new ArrayList<>(Arrays.asList(new MedicineHistory(1234, null, "10:30", "11:00", null)));
         UserMedicines userMedicines
-                = new UserMedicines(123,null,"Amif","200mg","FRI",null,"10:30","Eat 300mg",12,3,null,medicineHistoryList,null);
+                = new UserMedicines(123, null, "Amif", "200mg", "FRI", null, "10:30", "Eat 300mg", 12, 3, null, medicineHistoryList, null);
 
         when(userMedicineRepository.getMedById(123)).thenReturn(userMedicines);
         MedicineResponse medicineResponse = userMedicineService.getMedicineHistory(123);
-        Assertions.assertEquals(Messages.SUCCESS,medicineResponse.getStatus());
+        Assertions.assertEquals(Messages.SUCCESS, medicineResponse.getStatus());
 
     }
 
     @Test
     void getMedicineHistoryMessage() throws UserMedicineException {
-        List<MedicineHistory> medicineHistoryList = new ArrayList<>(Arrays.asList(new MedicineHistory(1234,null,"10:30","11:00",null)));
+        List<MedicineHistory> medicineHistoryList = new ArrayList<>(Arrays.asList(new MedicineHistory(1234, null, "10:30", "11:00", null)));
         UserMedicines userMedicines
-                = new UserMedicines(123,null,"Amif","200mg","FRI",null,"10:30","Eat 300mg",12,3,null,medicineHistoryList,null);
+                = new UserMedicines(123, null, "Amif", "200mg", "FRI", null, "10:30", "Eat 300mg", 12, 3, null, medicineHistoryList, null);
 
         when(userMedicineRepository.getMedById(123)).thenReturn(userMedicines);
         MedicineResponse medicineResponse = userMedicineService.getMedicineHistory(123);
-        Assertions.assertEquals(Messages.DATA_FOUND,medicineResponse.getMessage());
+        Assertions.assertEquals(Messages.DATA_FOUND, medicineResponse.getMessage());
 
     }
 
@@ -210,7 +220,7 @@ class UserMedicineServiceImplTest {
     void getMedicineHistoryException() throws UserMedicineException {
         List<MedicineHistory> medicineHistoryList = new ArrayList<>(Arrays.asList());
         UserMedicines userMedicines
-                = new UserMedicines(123,null,"Amif","200mg","FRI",null,"10:30","Eat 300mg",12,3,null,medicineHistoryList,null);
+                = new UserMedicines(123, null, "Amif", "200mg", "FRI", null, "10:30", "Eat 300mg", 12, 3, null, medicineHistoryList, null);
 
         when(userMedicineRepository.getMedById(123)).thenReturn(
                 userMedicines
@@ -218,76 +228,121 @@ class UserMedicineServiceImplTest {
         try {
             MedicineResponse medicineResponse = userMedicineService.getMedicineHistory(123);
 
-        }catch (UserMedicineException userMedicineException){
-            Assertions.assertEquals(Messages.DATA_NOT_FOUND,userMedicineException.getMessage());
+        } catch (UserMedicineException userMedicineException) {
+            Assertions.assertEquals(Messages.DATA_NOT_FOUND, userMedicineException.getMessage());
 
         }
 
     }
+    @Test
+    void getMedicineHistorySQLException() throws UserMedicineException {
+        List<MedicineHistory> medicineHistoryList = new ArrayList<>(Arrays.asList());
+        UserMedicines userMedicines
+                = new UserMedicines(123, null, "Amif", "200mg", "FRI", null, "10:30", "Eat 300mg", 12, 3, null, medicineHistoryList, null);
+
+        when(userMedicineRepository.getMedById(123)).thenThrow(JDBCConnectionException.class);
+        try {
+            MedicineResponse medicineResponse = userMedicineService.getMedicineHistory(123);
+
+        } catch (UserMedicineException userMedicineException) {
+            Assertions.assertEquals(Messages.ERROR_TRY_AGAIN, userMedicineException.getMessage());
+
+        }
+
+    }
+    @Test
+    void syncMedicines() throws UserMedicineException {
+
+        UserEntity userEntityTest = new UserEntity(
+                "1juj2","Nikunj","nikkubisht112@gmail.com",LocalDateTime.now(),LocalDateTime.now(),null,null
+        );
+
+        when(userRepository.getUserById("1234")).thenReturn(userEntityTest);
+        List<MedicinePojo> medicinePojoList = new ArrayList<>(Arrays.asList(new MedicinePojo(123,"Fri",4,null,"Eat 200 mg",13,"Ami","Eat daily",null,1,"10:30")));
+        SyncResponse syncResponse = userMedicineService.syncMedicines("1234",medicinePojoList);
+        Assertions.assertEquals(Messages.SUCCESS,syncResponse.getStatus());
+    }
 
     @Test
-    void syncMedicines() {
+    void syncMedicinesSQLException() throws UserMedicineException {
+
+        UserEntity userEntityTest = new UserEntity(
+                "1juj2","Nikunj","nikkubisht112@gmail.com",LocalDateTime.now(),LocalDateTime.now(),null,null
+        );
+
+        when(userRepository.getUserById("1234")).thenThrow(JDBCConnectionException.class);
+        List<MedicinePojo> medicinePojoList = new ArrayList<>(Arrays.asList(new MedicinePojo(123,"Fri",4,null,"Eat 200 mg",13,"Ami","Eat daily",null,1,"10:30")));
+        try {
+            SyncResponse syncResponse = userMedicineService.syncMedicines("1234",medicinePojoList);
+
+        }catch (UserMedicineException userMedicineException){
+            Assertions.assertEquals(Messages.ERROR_TRY_AGAIN,userMedicineException.getMessage());
+
+        }
     }
 
     @Test
     void getUserMedicineImagesStatus() throws UserMedicineException {
 
-        List<Image> images = new ArrayList<>(Arrays.asList(new Image("123",new Date(),"10:30","Nikunj","32rer",null)));
+        List<Image> images = new ArrayList<>(Arrays.asList(new Image("123", new Date(), "10:30", "Nikunj", "32rer", null)));
         UserMedicines userMedicines
-                = new UserMedicines(123,null,"Amif","200mg","FRI",null,"10:30","Eat 300mg",12,3,null,null,images);
+                = new UserMedicines(123, null, "Amif", "200mg", "FRI", null, "10:30", "Eat 300mg", 12, 3, null, null, images);
 
         when(userMedicineRepository.getMedById(123)).thenReturn(userMedicines);
         ImagesResponse imagesResponse = userMedicineService.getUserMedicineImages(123);
         Assertions
                 .assertEquals(Messages.SUCCESS
-                        ,imagesResponse.getStatus());
+                        , imagesResponse.getStatus());
     }
+
     @Test
     void getUserMedicineImagesMessage() throws UserMedicineException {
 
-        List<Image> images = new ArrayList<>(Arrays.asList(new Image("123",new Date(),"10:30","Nikunj","32rer",null)));
+        List<Image> images = new ArrayList<>(Arrays.asList(new Image("123", new Date(), "10:30", "Nikunj", "32rer", null)));
         UserMedicines userMedicines
-                = new UserMedicines(123,null,"Amif","200mg","FRI",null,"10:30","Eat 300mg",12,3,null,null,images);
+                = new UserMedicines(123, null, "Amif", "200mg", "FRI", null, "10:30", "Eat 300mg", 12, 3, null, null, images);
 
         when(userMedicineRepository.getMedById(123)).thenReturn(userMedicines);
         ImagesResponse imagesResponse = userMedicineService.getUserMedicineImages(123);
         Assertions
                 .assertEquals(Messages.DATA_FOUND
-                        ,imagesResponse.getMessage());
+                        , imagesResponse.getMessage());
     }
+
     @Test
     void getUserMedicineImagesSQLException() throws UserMedicineException {
 
-        List<Image> images = new ArrayList<>(Arrays.asList(new Image("123",new Date(),"10:30","Nikunj","32rer",null)));
+        List<Image> images = new ArrayList<>(Arrays.asList(new Image("123", new Date(), "10:30", "Nikunj", "32rer", null)));
         UserMedicines userMedicines
-                = new UserMedicines(123,null,"Amif","200mg","FRI",null,"10:30","Eat 300mg",12,3,null,null,images);
+                = new UserMedicines(123, null, "Amif", "200mg", "FRI", null, "10:30", "Eat 300mg", 12, 3, null, null, images);
 
         when(userMedicineRepository.getMedById(123)).thenThrow(JDBCConnectionException.class);
-       try {
-           ImagesResponse imagesResponse = userMedicineService.getUserMedicineImages(123);
+        try {
+            ImagesResponse imagesResponse = userMedicineService.getUserMedicineImages(123);
 
-       }catch (UserMedicineException userMedicineException){
-           Assertions
-                   .assertEquals(Messages.ERROR_TRY_AGAIN
-                           ,userMedicineException.getMessage());
+        } catch (UserMedicineException userMedicineException) {
+            Assertions
+                    .assertEquals(Messages.ERROR_TRY_AGAIN
+                            , userMedicineException.getMessage());
 
-       }
+        }
     }
+
     @Test
     void getUserMedicineImagesEmptyException() throws UserMedicineException {
 
-        List<Image> images = new ArrayList<>(Arrays.asList(new Image("123",new Date(),"10:30","Nikunj","32rer",null)));
+        List<Image> images = new ArrayList<>(Arrays.asList(new Image("123", new Date(), "10:30", "Nikunj", "32rer", null)));
         UserMedicines userMedicines
-                = new UserMedicines(123,null,"Amif","200mg","FRI",null,"10:30","Eat 300mg",12,3,null,null,images);
+                = new UserMedicines(123, null, "Amif", "200mg", "FRI", null, "10:30", "Eat 300mg", 12, 3, null, null, images);
 
         when(userMedicineRepository.getMedById(123)).thenReturn(null);
         try {
             ImagesResponse imagesResponse = userMedicineService.getUserMedicineImages(123);
 
-        }catch (UserMedicineException userMedicineException){
+        } catch (UserMedicineException userMedicineException) {
             Assertions
                     .assertEquals(Messages.DATA_NOT_FOUND
-                            ,userMedicineException.getMessage());
+                            , userMedicineException.getMessage());
 
         }
     }

@@ -105,13 +105,6 @@ class UserServiceTest {
             Assertions.assertEquals(Messages.DATA_NOT_FOUND,userExceptionMessage.getMessage());
         }
     }
-    @Test
-    void updateUser() {
-    }
-
-    @Test
-    void getUserByName() {
-    }
 
     @Test
     void getUserByEmail() throws UserExceptionMessage {
@@ -189,7 +182,7 @@ class UserServiceTest {
             userServiceImpl.login("n@gmail.com", "fdfdfdf");
         } catch (UserExceptionMessage hibernateException) {
             UserResponse userResponse = new UserResponse(Messages.FAILED, hibernateException.getMessage(), null, "", "");
-            Assertions.assertEquals(userResponse.getStatus(), Messages.FAILED);
+            Assertions.assertEquals(Messages.FAILED,userResponse.getStatus());
 
         }
     }
@@ -202,7 +195,7 @@ class UserServiceTest {
             userServiceImpl.login("n@gmail.com", "fdfdfdf");
         } catch (UserExceptionMessage hibernateException) {
             UserResponse userResponse = new UserResponse(Messages.FAILED, hibernateException.getMessage(), null, "", "");
-            Assertions.assertEquals(userResponse.getStatus(), Messages.FAILED);
+            Assertions.assertEquals(Messages.FAILED,userResponse.getStatus());
 
         }
     }
@@ -232,7 +225,7 @@ class UserServiceTest {
         when(passwordEncoder.encode(any())).thenReturn("psps");
         userServiceImpl.saveUser(userEntityDTO,"frf","frfr");
         UserResponse userResponse = new UserResponse(Messages.SUCCESS, Messages.SAVED_USER_SUCCESSFULLY, new ArrayList<>(Arrays.asList()), "jwjw", "pwpw");
-        Assertions.assertEquals(userResponse.getStatus(),Messages.SUCCESS);
+        Assertions.assertEquals(Messages.SUCCESS,userResponse.getStatus());
     }
 
     @Test

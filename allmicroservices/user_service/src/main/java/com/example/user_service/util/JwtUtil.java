@@ -66,7 +66,7 @@ public class JwtUtil {
                 .signWith(SignatureAlgorithm.HS256, secretKey).compact();
     }
 
-    public Boolean validateToken(String token, UserDetails userDetails, HttpServletRequest httpServletRequest) {
+    public boolean validateToken(String token, UserDetails userDetails, HttpServletRequest httpServletRequest) {
         try {
             final String username = extractUsername(token);
             return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));

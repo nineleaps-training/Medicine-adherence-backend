@@ -41,9 +41,22 @@ public class MedicinePojo {
     @NotNull
     @NotBlank
     private String medicineName;
+
+
+    @NotNull
+    @NotBlank
     private String title;
+
+    @NotNull
+    @NotBlank
     private String startDate;
+
+    @NotNull
+    @NotBlank
     private int status;
+
+    @NotNull
+    @NotBlank
     private String time;
 
 

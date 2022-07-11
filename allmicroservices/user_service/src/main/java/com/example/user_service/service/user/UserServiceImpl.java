@@ -24,15 +24,12 @@ import com.example.user_service.util.Messages;
 import org.hibernate.HibernateException;
 import org.hibernate.exception.JDBCConnectionException;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.sql.SQLException;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
 
@@ -42,14 +39,11 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final UserDetailsRepository userDetailsRepository;
-    @Autowired
-    private ModelMapper mapper;
+    private final ModelMapper mapper;
     private final PdfMailSender pdfMailSender;
     private final UserMedicineRepository userMedicineRepository;
-    @Autowired
-    private JwtUtil jwtUtil;
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    private final JwtUtil jwtUtil;
+    private final PasswordEncoder passwordEncoder;
     private final GoogleOauthCheck googleOauthCheck;
 
     public UserServiceImpl(UserRepository userRepository, UserMedicineRepository userMedicineRepository, UserDetailsRepository userDetailsRepository, PdfMailSender pdfMailSender, GoogleOauthCheck googleOauthCheck, PasswordEncoder passwordEncoder, JwtUtil jwtUtil, ModelMapper mapper) {
@@ -89,7 +83,7 @@ public class UserServiceImpl implements UserService {
 
             return new UserResponse(Messages.SUCCESS, Messages.SAVED_USER_SUCCESSFULLY, new ArrayList<>(Arrays.asList(ue.get())), jwtToken, refreshToken);
         } catch (DataAccessException | JDBCConnectionException accessException) {
-            com.example.user_service.config.log.Logger.errorLog("UserService", accessException.getMessage());
+            com.example.user_service.config.log.Logger.errorLog(Messages.USER_SERVICE, accessException.getMessage());
             throw new UserExceptionMessage(Messages.ERROR_TRY_AGAIN + accessException.getMessage());
         }
     }
@@ -104,7 +98,7 @@ public class UserServiceImpl implements UserService {
 
             return CompletableFuture.completedFuture(list);
         } catch (DataAccessException | JDBCConnectionException accessException) {
-            com.example.user_service.config.log.Logger.errorLog("UserService", accessException.getMessage());
+            com.example.user_service.config.log.Logger.errorLog(Messages.USER_SERVICE, accessException.getMessage());
             throw new UserExceptionMessage(Messages.ERROR_TRY_AGAIN);
         }
     }
@@ -121,7 +115,7 @@ public class UserServiceImpl implements UserService {
 
             return optionalUserEntity.get();
         } catch (DataAccessException | JDBCConnectionException accessException) {
-            com.example.user_service.config.log.Logger.errorLog("UserService", accessException.getMessage());
+            com.example.user_service.config.log.Logger.errorLog(Messages.USER_SERVICE, accessException.getMessage());
             throw new UserExceptionMessage(Messages.ERROR_TRY_AGAIN);
         }
     }
@@ -133,7 +127,7 @@ public class UserServiceImpl implements UserService {
         try {
             return userRepository.searchByMail(email);
         } catch (DataAccessException | HibernateException accessException) {
-            com.example.user_service.config.log.Logger.errorLog("UserService", accessException.getMessage());
+            com.example.user_service.config.log.Logger.errorLog(Messages.USER_SERVICE, accessException.getMessage());
             throw new DataAccessExceptionMessage(Messages.ERROR_TRY_AGAIN + accessException.getMessage());
         }
 
@@ -170,7 +164,7 @@ public class UserServiceImpl implements UserService {
 
 
         } catch (DataAccessException | HibernateException accessException) {
-            com.example.user_service.config.log.Logger.errorLog("UserService", accessException.getMessage());
+            com.example.user_service.config.log.Logger.errorLog(Messages.USER_SERVICE, accessException.getMessage());
             throw new UserExceptionMessage(Messages.ERROR_TRY_AGAIN + accessException.getMessage());
         }
 

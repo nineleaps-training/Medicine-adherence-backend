@@ -1,6 +1,4 @@
 package com.example.user_service.service.medicine;
-
-import com.example.user_service.exception.DataAccessExceptionMessage;
 import com.example.user_service.exception.UserExceptionMessage;
 import com.example.user_service.exception.UserMedicineException;
 import com.example.user_service.model.image.Image;
@@ -155,8 +153,8 @@ public class UserMedicineServiceImpl implements UserMedicineService {
 
             userMedicineRepository.saveAll(userMedicinesList);
             return new SyncResponse(Messages.SUCCESS, Messages.SYNC_SUCCESS);
-        } catch (Exception exception) {
-            throw new UserMedicineException("Sync failed");
+        } catch (JDBCConnectionException exception) {
+            throw new UserMedicineException(Messages.ERROR_TRY_AGAIN);
         }
     }
 

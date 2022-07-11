@@ -31,7 +31,7 @@ public class PdfMailSender {
                 "            <div style='text-align: right;'><img src='MEdstick.png' style='width:150px; height:60px'></div>\n" +
                 "            <div style='background-color: #3743ab;border-radius: 15px; margin-bottom: 30px;height: 110px;'>\n" +
                 "                <div style='font-size: 60px;text-align: center;color: white;'>Patient Report</div>\n" +
-                "                <div style='font-size: 30px;text-align: center; color:white;'>Adherence Rate - "+ String.valueOf(Math.ceil(((double)userMedicines.getCurrentCount()/userMedicines.getTotalMedReminders())*100)) + "%" +"</div>\n" +
+                "                <div style='font-size: 30px;text-align: center; color:white;'>Adherence Rate - "+ (Math.ceil(((double)userMedicines.getCurrentCount()/userMedicines.getTotalMedReminders())*100)) + "%" +"</div>\n" +
                 "            </div>\n" +
                 "           <div style='font-size:24px; margin-bottom: 8px; font-weight: 600; color: gray;'>Patient Details </div>\n" +
                 "            <div align='left'>\n" +
@@ -81,19 +81,19 @@ public class PdfMailSender {
 
 
     private String medicineHistory(List<MedicineHistory> medicineHistories) {
-        String medicineHistory = "";
 
+        StringBuilder stringBuilder = new StringBuilder();
         for (MedicineHistory medicineHistory1 : medicineHistories) {
 
-            medicineHistory += " <tr>\n" +
+            stringBuilder.append(" <tr>\n" +
                     "                <td style='border: 0.5px solid black;text-align: center;vertical-align: middle;height: 40px;'>" + medicineHistory1.getDate() + "</td>\n" +
                     "                <td style='border: 0.5px solid black;text-align: center;vertical-align: middle;height: 40px;'>" + medicineHistory1.getTaken() + "</td>\n" +
                     "                <td style='border: 0.5px solid black;text-align: center;vertical-align: middle;height: 40px;'>" + medicineHistory1.getNotTaken() + "</td>\n" +
-                    "            </tr>\n";
+                    "            </tr>\n");
 
         }
 
-        return medicineHistory;
+        return stringBuilder.toString();
     }
 
 
