@@ -5,11 +5,12 @@ import com.example.user_service.model.user.UserDetails;
 import com.example.user_service.model.user.UserEntity;
 import com.example.user_service.pojos.dto.user.UserDetailsDTO;
 import com.example.user_service.pojos.response.user.UserUpdateDetailResponse;
+
 import com.example.user_service.repository.user.UserDetailsRepository;
 import com.example.user_service.repository.user.UserRepository;
 import com.example.user_service.util.Messages;
 import org.hibernate.exception.JDBCConnectionException;
-import org.modelmapper.ModelMapper;
+
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
@@ -17,8 +18,8 @@ import java.util.Optional;
 
 @Service
 public class UserDetailServiceImpl implements UserDetailService {
-    private UserDetailsRepository userDetailsRepository;
-    private UserRepository userRepository;
+    private final UserDetailsRepository userDetailsRepository;
+    private final UserRepository userRepository;
 
     UserDetailServiceImpl(UserDetailsRepository userDetailsRepository , UserRepository userRepository){
         this.userDetailsRepository = userDetailsRepository;

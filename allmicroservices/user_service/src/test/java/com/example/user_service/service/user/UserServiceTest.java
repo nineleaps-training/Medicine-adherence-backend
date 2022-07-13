@@ -34,6 +34,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.io.FileNotFoundException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -129,7 +130,7 @@ class UserServiceTest {
 
     @Test
     @DisplayName("Check for success pdf response")
-    void sendUserMedicines() throws UserExceptionMessage {
+    void sendUserMedicines() throws UserExceptionMessage, FileNotFoundException {
         UserMedicines userMedicines = new UserMedicines(71581, "2022-05-27T04:12:31.339Z", "Glimeperide", "Take with water", "Fri", "2022-06-09T04:13:40.289Z", "9:44 AM-9:46 AM", "Take 20mg of glim med", 4, 2, null, null, null);
         when(userMedicineRepository.findById(71581)).thenReturn(Optional.of(userMedicines));
         PdfLinkResponse pdfLinkResponse = userServiceImpl.sendUserMedicines(71581);
@@ -140,7 +141,7 @@ class UserServiceTest {
 
     @Test
     @DisplayName("Failure for pdf response")
-    void sendUserMedicineFailure() throws UserExceptionMessage {
+    void sendUserMedicineFailure() throws UserExceptionMessage, FileNotFoundException {
         UserMedicines userMedicines = new UserMedicines();
         PdfLinkResponse pdfLinkResponse = new PdfLinkResponse(Messages.FAILED, Messages.ERROR_TRY_AGAIN, null);
         PdfLinkResponse pdfLinkResponseTest = userServiceImpl.sendUserMedicines(71581);

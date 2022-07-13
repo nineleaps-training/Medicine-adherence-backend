@@ -1,0 +1,5 @@
+2022-07-13 11:43:14,535 DEBUG org.springframework.boot.availability.ApplicationAvailabilityBean [main] Application availability state LivenessState changed to CORRECT
+2022-07-13 11:43:14,542 INFO org.springframework.boot.autoconfigure.batch.JobLauncherApplicationRunner [main] Running default command line with: []
+2022-07-13 11:43:14,544 DEBUG org.springframework.boot.availability.ApplicationAvailabilityBean [main] Application availability state ReadinessState changed to ACCEPTING_TRAFFIC
+2022-07-13 11:50:49,016 DEBUG org.springframework.boot.availability.ApplicationAvailabilityBean [SpringApplicationShutdownHook] Application availability state ReadinessState changed from ACCEPTING_TRAFFIC to REFUSING_TRAFFIC
+2022-07-13 11:50:49,016 DEBUG org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext [SpringApplicationShutdownHook] Closing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@3adcc812, started on Wed Jul 13 11:43:07 IST 2022

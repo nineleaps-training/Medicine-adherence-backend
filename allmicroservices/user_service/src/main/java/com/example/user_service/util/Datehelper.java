@@ -13,13 +13,7 @@ public class Datehelper {
 
     }
 
-    public static String getDay(){
 
-        String[] days = {"Sun","Mon","Tue","Wed","Thu","Fri","Sat"};
-        return days[new Date().getDay()];
-
-
-    }
     public static LocalDateTime getcurrentdatatime(){
         return LocalDateTime.now();
 

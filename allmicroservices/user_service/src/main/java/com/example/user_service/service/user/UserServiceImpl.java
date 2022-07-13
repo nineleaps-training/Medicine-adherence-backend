@@ -30,6 +30,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.io.FileNotFoundException;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
 
@@ -60,7 +62,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserResponse saveUser(UserEntityDTO userEntityDTO, String fcmToken, String picPath) throws UserExceptionMessage, GoogleSsoException {
         try {
-           // googleOauthCheck.checkForGoogleaccount(userEntityDTO.getEmail());
+            googleOauthCheck.checkForGoogleaccount(userEntityDTO.getEmail());
             UserEntity user = userRepository.findByMail(userEntityDTO.getEmail());
             if (user != null) {
                 return new UserResponse(Messages.FAILED, Messages.USER_ALREADY_PRESENT, new ArrayList<>(Arrays.asList(user)), "", "");
@@ -135,7 +137,7 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public PdfLinkResponse sendUserMedicines(Integer medId) throws UserExceptionMessage {
+    public PdfLinkResponse sendUserMedicines(Integer medId) throws FileNotFoundException {
 
         Optional<UserMedicines> userMedicines = userMedicineRepository.findById(medId);
         if (userMedicines.isEmpty()) {

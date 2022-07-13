@@ -60,7 +60,7 @@ public class CareTakerServiceImpl implements CareTakerService {
 
     @Override
     public CaretakerResponse saveCareTaker(UserCaretakerDTO userCaretakerDTO) throws UserCaretakerException {
-
+        logger.info("");
         try {
             UserCaretaker userCaretaker = mapToEntity(userCaretakerDTO);
             userCaretaker.setCreatedAt("");
