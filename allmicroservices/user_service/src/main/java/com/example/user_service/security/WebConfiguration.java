@@ -11,8 +11,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class WebConfiguration implements WebMvcConfigurer {
 
     @Bean
-    public AuthenticationHandler authenticationHandler() {
-        return new AuthenticationHandler();
+    public AuthenticationInterceptor authenticationHandler() {
+        return new AuthenticationInterceptor();
     }
 
     @Override
@@ -20,16 +20,16 @@ public class WebConfiguration implements WebMvcConfigurer {
 
         registry.addInterceptor(authenticationHandler())
                 .addPathPatterns(
-//                        "/api/v1/email",
-//                        "/api/v1/users",
-//                        "/api/v1/request",
-//                        "/api/v1/accept",
-//                        "/api/v1/patients",
-//                        "/api/v1/patient/requests",
-//                        "/api/v1/caretakers",
-  //                      "/api/v1/caretaker/requests"
-                         "/api/v1/medicines/sync/**"
-//                        "/api/v1/userdetails"
+                        "/api/v1/email",
+                        "/api/v1/users",
+                        "/api/v1/request",
+                        "/api/v1/accept",
+                        "/api/v1/patients",
+                        "/api/v1/patient/requests",
+                        "/api/v1/caretakers",
+                        "/api/v1/caretaker/requests",
+                        "/api/v1/medicines/sync/**",
+                        "/api/v1/userdetails"
                 );
 
     }

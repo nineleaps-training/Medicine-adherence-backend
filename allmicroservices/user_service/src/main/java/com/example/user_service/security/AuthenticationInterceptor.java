@@ -14,17 +14,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @Service
-public class AuthenticationHandler implements HandlerInterceptor {
+public class AuthenticationInterceptor implements HandlerInterceptor {
 
     @Autowired
     JwtUtil jwtUtil;
 
     @Autowired
     UserDetailService userDetailService;
-    @Autowired
-    UserRepository userRepository;
-
-    Logger logger = LoggerFactory.getLogger(AuthenticationHandler.class);
+    Logger logger = LoggerFactory.getLogger(AuthenticationInterceptor.class);
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
@@ -47,23 +44,25 @@ public class AuthenticationHandler implements HandlerInterceptor {
 
         if (username != null) {
             try {
-
+                logger.info("Authenticating user with id :{}",id);
                 UserDetails userDetails = userDetailService.loadUserByUsername(id);
                 if (Boolean.FALSE.equals(jwtUtil.validateToken(jwt.trim(), userDetails,request))) {
                     if (request.getAttribute("expired").equals("true")) {
-                        logger.info("expired");
+                        logger.info("expired jwt : {}",id);
                         response.setStatus(401);
                         return false;
                     }
+                    logger.error("Unauthorized user : {}",id);
                     response.setStatus(403);
                     return false;
                 } else {
-                    logger.info(userDetails.getUsername());
+                    logger.info("User Authenticated : {}",userDetails.getUsername());
                     response.setHeader("jwt",jwt);
                     return true;
 
                 }
             } catch (Exception usernameNotFoundException) {
+                logger.error("Error in finding user with Id :{}",id);
                 response.setStatus(404);
                 return false;
             }

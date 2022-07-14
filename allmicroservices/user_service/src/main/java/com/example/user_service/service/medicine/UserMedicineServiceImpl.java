@@ -52,7 +52,7 @@ public class UserMedicineServiceImpl implements UserMedicineService {
     @Override
     @Async
     public UserMedicinesResponse getallUserMedicines(String userId) throws UserExceptionMessage, UserMedicineException {
-
+        logger.info("Fetch medicines of a user : {}",userId);
         try {
             UserEntity user = userRepository.getUserById(userId);
             if (user == null) {
@@ -61,12 +61,15 @@ public class UserMedicineServiceImpl implements UserMedicineService {
             List<UserMedicines> list = user.getUserMedicines();
             return new UserMedicinesResponse(Messages.SUCCESS, Messages.DATA_FOUND, CompletableFuture.completedFuture(list).get());
         } catch (JDBCConnectionException| InterruptedException | ExecutionException dataAccessException) {
+            com.example.user_service.config.log.Logger.errorLog(Messages.MEDICINE_SERVICE, dataAccessException.getMessage());
+
             throw new UserMedicineException(Messages.ERROR_TRY_AGAIN);
         }
 
     }
     @Override
     public SyncMedicineResponse syncData(String userId, List<UserMedicines> list) throws UserMedicineException {
+        logger.info("Sync medicines for user : {}",userId);
         try {
             UserEntity user = userRepository.getUserById(userId);
             if (user == null) {
@@ -79,6 +82,8 @@ public class UserMedicineServiceImpl implements UserMedicineService {
             userMedicineRepository.saveAll(list);
             return new SyncMedicineResponse(Messages.SUCCESS,Messages.SYNCED_MEDICINE);
         } catch (DataAccessException | JDBCConnectionException dataAccessException) {
+            com.example.user_service.config.log.Logger.errorLog(Messages.MEDICINE_SERVICE, dataAccessException.getMessage());
+
             throw new UserMedicineException(Messages.ERROR_TRY_AGAIN);
         }
     }
@@ -87,6 +92,7 @@ public class UserMedicineServiceImpl implements UserMedicineService {
     @Override
     @Async
     public SyncMedicineHistoryResponse syncMedicineHistory(Integer medId, List<MedicineHistoryDTO> medicineHistoryDTOS) throws UserMedicineException {
+       logger.info("Sync Medicine History for medicine : {}",medId);
         try {
             UserMedicines userMedicines = userMedicineRepository.getMedById(medId);
             if (userMedicines == null) {
@@ -108,6 +114,8 @@ public class UserMedicineServiceImpl implements UserMedicineService {
             return new SyncMedicineHistoryResponse(Messages.SUCCESS,Messages.SYNCED_MEDICINE_HISTORY);
         } catch (DataAccessException | JDBCConnectionException
                 dataAccessException) {
+            com.example.user_service.config.log.Logger.errorLog(Messages.MEDICINE_SERVICE, dataAccessException.getMessage());
+
             throw new UserMedicineException(Messages.ERROR_TRY_AGAIN);
         }
     }
@@ -160,7 +168,7 @@ public class UserMedicineServiceImpl implements UserMedicineService {
 
     @Override
     public ImagesResponse getUserMedicineImages(Integer medId) throws UserMedicineException {
-
+        logger.info("Get Imaages for medicine :{}",medId);
         try {
             UserMedicines userMedicines = userMedicineRepository.getMedById(medId);
             if(userMedicines == null){
@@ -173,6 +181,8 @@ public class UserMedicineServiceImpl implements UserMedicineService {
                     .collect(Collectors.toList()));
 
         } catch (DataAccessException | JDBCConnectionException dataAccessException) {
+            com.example.user_service.config.log.Logger.errorLog(Messages.MEDICINE_SERVICE, dataAccessException.getMessage());
+
             throw new UserMedicineException(Messages.ERROR_TRY_AGAIN);
         }
     }

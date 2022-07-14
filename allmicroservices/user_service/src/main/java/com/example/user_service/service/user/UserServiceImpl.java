@@ -24,6 +24,8 @@ import com.example.user_service.util.Messages;
 import org.hibernate.HibernateException;
 import org.hibernate.exception.JDBCConnectionException;
 import org.modelmapper.ModelMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -48,6 +50,7 @@ public class UserServiceImpl implements UserService {
     private final PasswordEncoder passwordEncoder;
     private final GoogleOauthCheck googleOauthCheck;
 
+    Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
     public UserServiceImpl(UserRepository userRepository, UserMedicineRepository userMedicineRepository, UserDetailsRepository userDetailsRepository, PdfMailSender pdfMailSender, GoogleOauthCheck googleOauthCheck, PasswordEncoder passwordEncoder, JwtUtil jwtUtil, ModelMapper mapper) {
         this.userRepository = userRepository;
         this.userMedicineRepository = userMedicineRepository;
@@ -61,6 +64,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserResponse saveUser(UserEntityDTO userEntityDTO, String fcmToken, String picPath) throws UserExceptionMessage, GoogleSsoException {
+        logger.info("Save user :{}",userEntityDTO);
         try {
             googleOauthCheck.checkForGoogleaccount(userEntityDTO.getEmail());
             UserEntity user = userRepository.findByMail(userEntityDTO.getEmail());
@@ -107,6 +111,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserEntity getUserById(String userId) throws UserExceptionMessage {
+        logger.info("Get User Details :{}",userId);
         try {
             UserEntity user = userRepository.getUserById(userId);
             Optional<UserEntity> optionalUserEntity = Optional.ofNullable(user);
@@ -125,7 +130,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserMailDto getUserByEmail(String email) throws UserExceptionMessage {
-
+        logger.info(
+                "Get User by mail : {}",email
+        );
         try {
             return userRepository.searchByMail(email);
         } catch (DataAccessException | HibernateException accessException) {
@@ -137,15 +144,22 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public PdfLinkResponse sendUserMedicines(Integer medId) throws FileNotFoundException {
+    public PdfLinkResponse sendUserMedicines(Integer medId) throws FileNotFoundException, UserExceptionMessage {
+        logger.info("Generate Pdf for medicine : {}",medId);
+        try {
+            Optional<UserMedicines> userMedicines = userMedicineRepository.findById(medId);
+            if (userMedicines.isEmpty()) {
+                return new PdfLinkResponse(Messages.FAILED, Messages.ERROR_TRY_AGAIN, null);
+            }
+            UserEntity entity = userMedicines.get().getUserEntity();
+            List<MedicineHistory> medicineHistories = userMedicines.get().getMedicineHistories();
+            return new PdfLinkResponse(Messages.SUCCESS, Messages.PDF_SUCCESS, pdfMailSender.send(entity, userMedicines.get(), medicineHistories));
 
-        Optional<UserMedicines> userMedicines = userMedicineRepository.findById(medId);
-        if (userMedicines.isEmpty()) {
-            return new PdfLinkResponse(Messages.FAILED, Messages.ERROR_TRY_AGAIN, null);
+        }catch (DataAccessException | JDBCConnectionException exception){
+            com.example.user_service.config.log.Logger.errorLog(Messages.USER_SERVICE, exception.getMessage());
+            throw new UserExceptionMessage(Messages.ERROR_TRY_AGAIN);
+
         }
-        UserEntity entity = userMedicines.get().getUserEntity();
-        List<MedicineHistory> medicineHistories = userMedicines.get().getMedicineHistories();
-        return new PdfLinkResponse(Messages.SUCCESS, Messages.PDF_SUCCESS, pdfMailSender.send(entity, userMedicines.get(), medicineHistories));
 
     }
 

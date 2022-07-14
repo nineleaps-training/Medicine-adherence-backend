@@ -32,4 +32,6 @@ private Messages(){}
     public static final String Image_Sent_Successfully = "IMAGE_SENT";
     public static final String UNABLE_TO_SYNC = "UNABLE_TO_SYNC";
     public static final String USER_SERVICE = "USER_SERVICE";
+    public static final String CARETAKER_SERVICE = "CARETAKER_SERVICE";
+    public static final String MEDICINE_SERVICE = "MEDICINE_SERVICE";
 }
