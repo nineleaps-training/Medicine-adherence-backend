@@ -1,6 +1,6 @@
 package com.example.user_service.service.user;
 
-import com.example.user_service.exception.UserExceptionMessage;
+import com.example.user_service.exception.user.UserExceptionMessage;
 import com.example.user_service.model.user.UserDetails;
 import com.example.user_service.model.user.UserEntity;
 import com.example.user_service.pojos.dto.user.UserDetailsDTO;
@@ -15,12 +15,10 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.modelmapper.ModelMapper;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDateTime;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 @SpringBootTest
 @ExtendWith(MockitoExtension.class)

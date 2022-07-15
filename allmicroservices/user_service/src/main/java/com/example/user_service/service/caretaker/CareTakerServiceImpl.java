@@ -1,7 +1,7 @@
 package com.example.user_service.service.caretaker;
 
 
-import com.example.user_service.exception.UserCaretakerException;
+import com.example.user_service.exception.caretaker.UserCaretakerException;
 import com.example.user_service.model.image.Image;
 import com.example.user_service.model.user.UserCaretaker;
 import com.example.user_service.model.medicine.UserMedicines;

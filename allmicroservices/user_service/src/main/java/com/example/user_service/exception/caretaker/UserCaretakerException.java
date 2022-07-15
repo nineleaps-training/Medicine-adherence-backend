@@ -1,4 +1,4 @@
-package com.example.user_service.exception;
+package com.example.user_service.exception.caretaker;
 
 /**
  * Sends exception message for caretaker

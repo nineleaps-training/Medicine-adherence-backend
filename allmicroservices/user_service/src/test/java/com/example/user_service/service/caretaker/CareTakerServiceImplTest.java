@@ -1,7 +1,6 @@
 package com.example.user_service.service.caretaker;
 
-import com.example.user_service.exception.UserCaretakerException;
-import com.example.user_service.model.image.Image;
+import com.example.user_service.exception.caretaker.UserCaretakerException;
 import com.example.user_service.model.medicine.UserMedicines;
 import com.example.user_service.model.user.UserCaretaker;
 import com.example.user_service.model.user.UserEntity;
@@ -16,7 +15,6 @@ import com.example.user_service.repository.caretaker.UserCaretakerRepository;
 import com.example.user_service.repository.image.ImageRepository;
 import com.example.user_service.repository.medicine.UserMedicineRepository;
 import com.example.user_service.util.Messages;
-import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.hibernate.exception.JDBCConnectionException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -37,15 +35,12 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 

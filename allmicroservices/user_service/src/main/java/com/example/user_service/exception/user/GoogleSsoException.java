@@ -1,4 +1,4 @@
-package com.example.user_service.exception;
+package com.example.user_service.exception.user;
 
 public class GoogleSsoException extends Exception{
 

@@ -1,6 +1,6 @@
 package com.example.user_service.service.caretaker;
 
-import com.example.user_service.exception.UserCaretakerException;
+import com.example.user_service.exception.caretaker.UserCaretakerException;
 import com.example.user_service.pojos.dto.caretaker.UserCaretakerDTO;
 import com.example.user_service.pojos.response.caretaker.CaretakerListResponse;
 import com.example.user_service.pojos.response.caretaker.CaretakerResponse;

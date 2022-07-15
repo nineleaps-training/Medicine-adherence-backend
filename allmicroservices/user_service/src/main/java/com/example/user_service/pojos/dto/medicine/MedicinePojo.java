@@ -1,65 +1,46 @@
 package com.example.user_service.pojos.dto.medicine;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class MedicinePojo {
-
-
-    @NotNull
-    @NotBlank
     private int medicineId;
-
-    @NotNull
-    @NotBlank
+    @NotNull(message = "Days should not be null")
+    @NotBlank(message = "Days should not be empty")
     private String days;
-
-    @NotNull
-    @NotBlank
+    @Min(value = 0)
     private int currentCount;
-
-    @NotNull
-    @NotBlank
+    @NotNull(message = "EndDate should not be null")
+    @NotBlank(message = "EndDate should not be Empty")
     private String endDate;
-
-    @NotNull
-    @NotBlank
+    @NotNull(message = "Medicine Description should not be null")
+    @NotBlank(message = "Medicine Description should not be Empty")
     private String medicineDes;
-
-    @NotNull
-    @NotBlank
+    @Min(value = 0)
     private int totalMedReminders;
-
-    @NotNull
-    @NotBlank
+    @NotNull(message = "Medicine name should not be null")
+    @NotBlank(message = "Medicine name should not be Empty")
     private String medicineName;
-
-
-    @NotNull
-    @NotBlank
+    @NotNull(message = "Title should not be null")
+    @NotBlank(message = "Title should not be Empty")
     private String title;
-
-    @NotNull
-    @NotBlank
+    @NotNull(message = "StartDate should not be null")
+    @NotBlank(message = "StartDate should not be Empty")
     private String startDate;
-
-    @NotNull
-    @NotBlank
+    @Min(value = 0)
     private int status;
-
-    @NotNull
-    @NotBlank
+    @NotNull(message = "Time should not be null")
+    @NotBlank(message = "Time should not be Empty")
     private String time;
-
-
-
-///
 }
+
+
+//~ Formatted by Jindent --- http://www.jindent.com

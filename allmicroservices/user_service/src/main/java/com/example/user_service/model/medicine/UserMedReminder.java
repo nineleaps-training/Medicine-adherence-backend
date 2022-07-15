@@ -27,30 +27,30 @@ public class UserMedReminder {
     )
     private String reminderId;
 
-    @Column(name = "reminder_title")
+    @Column(name = "reminder_title",nullable = false)
     private String reminderTitle;
 
-    @Column(name = "created_at")
+    @Column(name = "created_at",nullable = false)
     private String createdAt;
 
-    @Column(name = "start_date")
+    @Column(name = "start_date",nullable = false)
     private Date startDate;
 
-    @Column(name = "end_date")
+    @Column(name = "end_date",nullable = false)
     private Date endDate;
 
-    @Column(name = "everyday")
+    @Column(name = "everyday",nullable = false)
     @Type(type = "org.hibernate.type.NumericBooleanType")
     private boolean everyday;
 
-    @Column(name = "reminder_status")
+    @Column(name = "reminder_status",nullable = false)
     @Type(type = "org.hibernate.type.NumericBooleanType")
     private boolean reminderStatus;
 
-    @Column(name = "days")
+    @Column(name = "days",nullable = false)
     private String days;
 
-    @Column(name = "reminder_time")
+    @Column(name = "reminder_time",nullable = false)
     private String reminderTime;
 
     @OneToOne(

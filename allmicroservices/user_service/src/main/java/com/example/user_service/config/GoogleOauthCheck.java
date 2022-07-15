@@ -1,6 +1,6 @@
 package com.example.user_service.config;
 
-import com.example.user_service.exception.GoogleSsoException;
+import com.example.user_service.exception.user.GoogleSsoException;
 import com.example.user_service.pojos.authentication.GoogleOauthData;
 import com.example.user_service.util.Messages;
 import org.springframework.stereotype.Component;

@@ -1,7 +1,7 @@
 package com.example.user_service.service.medicine;
 
-import com.example.user_service.exception.UserExceptionMessage;
-import com.example.user_service.exception.UserMedicineException;
+import com.example.user_service.exception.user.UserExceptionMessage;
+import com.example.user_service.exception.medicine.UserMedicineException;
 import com.example.user_service.model.image.Image;
 import com.example.user_service.model.medicine.MedicineHistory;
 import com.example.user_service.model.medicine.UserMedicines;
@@ -22,7 +22,6 @@ import com.example.user_service.util.Messages;
 import org.hibernate.exception.JDBCConnectionException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -34,7 +33,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 import static org.mockito.Mockito.when;
 

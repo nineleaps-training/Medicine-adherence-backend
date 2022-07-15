@@ -2,8 +2,8 @@ package com.example.user_service.service.user;
 
 import com.example.user_service.config.GoogleOauthCheck;
 import com.example.user_service.config.PdfMailSender;
-import com.example.user_service.exception.GoogleSsoException;
-import com.example.user_service.exception.UserExceptionMessage;
+import com.example.user_service.exception.user.GoogleSsoException;
+import com.example.user_service.exception.user.UserExceptionMessage;
 import com.example.user_service.model.medicine.UserMedicines;
 import com.example.user_service.model.user.UserDetails;
 import com.example.user_service.model.user.UserEntity;
@@ -15,7 +15,6 @@ import com.example.user_service.repository.medicine.UserMedicineRepository;
 import com.example.user_service.repository.user.UserDetailsRepository;
 import com.example.user_service.repository.user.UserRepository;
 import com.example.user_service.service.medicine.UserMedicineService;
-import com.example.user_service.util.Datehelper;
 import com.example.user_service.util.JwtUtil;
 import com.example.user_service.util.Messages;
 import org.hibernate.HibernateException;
