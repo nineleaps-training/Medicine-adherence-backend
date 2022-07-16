@@ -12,6 +12,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import com.example.user_service.pojos.response.user.GetUsersresponse;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -40,21 +41,21 @@ import com.example.user_service.util.Messages;
 @RestController
 @RequestMapping(path = "/api/v1")
 public class UserController {
-    private final UserService    userService;
+    private final UserService userService;
     private final RabbitTemplate rabbitTemplate;
-    private final JwtUtil        jwtUtil;
+    private final JwtUtil jwtUtil;
 
     UserController(UserService userService, JwtUtil jwtUtil, RabbitTemplate rabbitTemplate) {
-        this.jwtUtil        = jwtUtil;
-        this.userService    = userService;
+        this.jwtUtil = jwtUtil;
+        this.userService = userService;
         this.rabbitTemplate = rabbitTemplate;
     }
 
     // saving the user when they signup
 
     @PostMapping(
-        value    = "/login",
-        produces = MediaType.APPLICATION_JSON_VALUE
+            value = "/login",
+            produces = MediaType.APPLICATION_JSON_VALUE
     )
     public ResponseEntity<UserResponse> login(@RequestBody @Valid LoginDTO loginDTO) throws UserExceptionMessage {
         return new ResponseEntity<>(userService.login(loginDTO.getEmail(), loginDTO.getFcmToken()), HttpStatus.OK);
@@ -62,7 +63,7 @@ public class UserController {
 
     @PostMapping("/refreshToken")
     public ResponseEntity<RefreshTokenResponse> refreshToken(@NotNull @NotBlank @Valid
-    @RequestParam(name = "uid") String uid, HttpServletRequest httpServletRequest)
+                                                             @RequestParam(name = "uid") String uid, HttpServletRequest httpServletRequest)
             throws UserExceptionMessage, UserMedicineException, ExecutionException, InterruptedException {
         String token = httpServletRequest.getHeader("Authorization").substring(7);
 
@@ -76,15 +77,15 @@ public class UserController {
     }
 
     @PostMapping(
-        value    = "/user",
-        produces = MediaType.APPLICATION_JSON_VALUE
+            value = "/user",
+            produces = MediaType.APPLICATION_JSON_VALUE
     )
     public ResponseEntity<UserResponse> saveUser(@NotNull
-    @NotBlank
-    @RequestParam(name = "fcmToken") String fcmToken, @NotNull
-    @NotBlank
-    @RequestParam(name = "picPath") String picPath, @Valid
-    @RequestBody UserEntityDTO userEntityDTO) throws UserExceptionMessage, GoogleSsoException {
+                                                 @NotBlank
+                                                 @RequestParam(name = "fcmToken") String fcmToken, @NotNull
+                                                 @NotBlank
+                                                 @RequestParam(name = "picPath") String picPath, @Valid
+                                                 @RequestBody UserEntityDTO userEntityDTO) throws UserExceptionMessage, GoogleSsoException {
         return new ResponseEntity<>(userService.saveUser(userEntityDTO, fcmToken, picPath), HttpStatus.CREATED);
     }
 
@@ -98,36 +99,35 @@ public class UserController {
 
     // fetching the user with email if not present then sending to that email address
     @GetMapping(
-        value    = "/email",
-        produces = MediaType.APPLICATION_JSON_VALUE
+            value = "/email",
+            produces = MediaType.APPLICATION_JSON_VALUE
     )
     public ResponseEntity<UserMailResponse> getUserByEmail(@RequestParam("email") String email,
                                                            @RequestParam("sender") String sender)
             throws UserExceptionMessage {
         UserMailDto userEntity = userService.getUserByEmail(email);
-
         if (userEntity == null) {
             rabbitTemplate.convertAndSend("project_exchange",
-                                          "mail_key",
-                                          new MailInfo(email, "Please join", "patient_request", sender));
+                    "mail_key",
+                    new MailInfo(email, "Please join", "patient_request", sender));
 
-            return new ResponseEntity<>(new UserMailResponse(Messages.SUCCESS, Messages.MAIL_SENT_SUCCESSFULLY, null),
-                                        HttpStatus.OK);
+            return new ResponseEntity<>(new UserMailResponse(Messages.SUCCESS, Messages.MAIL_SENT_SUCCESSFULLY, userEntity),
+                    HttpStatus.OK);
         }
 
         return new ResponseEntity<>(new UserMailResponse(Messages.SUCCESS, Messages.DATA_FOUND, userEntity),
-                                    HttpStatus.OK);
+                HttpStatus.OK);
     }
 
     // fetching user by id
     @GetMapping(
-        value    = "/user",
-        produces = MediaType.APPLICATION_JSON_VALUE
+            value = "/user",
+            produces = MediaType.APPLICATION_JSON_VALUE
     )
     public ResponseEntity<UserProfileResponse> getUserById(@RequestParam("userId") String userId)
             throws UserExceptionMessage, UserMedicineException, ExecutionException, InterruptedException {
-        List<UserEntity>    user                = Arrays.asList(userService.getUserById(userId));
-        List<UserMedicines> list                = user.get(0).getUserMedicines();
+        List<UserEntity> user = Arrays.asList(userService.getUserById(userId));
+        List<UserMedicines> list = user.get(0).getUserMedicines();
         UserProfileResponse userProfileResponse = new UserProfileResponse(Messages.SUCCESS, user, list);
 
         return new ResponseEntity<>(userProfileResponse, HttpStatus.OK);
@@ -135,12 +135,13 @@ public class UserController {
 
     // fetching all the users along with details
     @GetMapping(
-        value    = "/users",
-        produces = MediaType.APPLICATION_JSON_VALUE
+            value = "/users",
+            produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<List<UserEntity>> getUsers()
+
+    public ResponseEntity<GetUsersresponse> getUsers()
             throws UserExceptionMessage, ExecutionException, InterruptedException {
-        return new ResponseEntity<>(userService.getUsers().get(), HttpStatus.OK);
+        return new ResponseEntity<>(userService.getUsers(), HttpStatus.OK);
     }
 }
 

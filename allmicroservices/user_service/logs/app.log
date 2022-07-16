@@ -1,17 +1,52 @@
-2022-07-14 13:02:14,837 INFO com.example.user_service.service.medicine.UserMedicineServiceImplTest [main] Starting UserMedicineServiceImplTest using Java 11.0.15 on nineleaps-ThinkPad-E480 with PID 55063 (started by nineleaps in /home/nineleaps/Downloads/project/allmicroservices/user_service)
-2022-07-14 13:02:14,843 INFO com.example.user_service.service.medicine.UserMedicineServiceImplTest [main] The following profiles are active: dev
-2022-07-14 13:02:14,843 DEBUG org.springframework.boot.SpringApplication [main] Loading source class com.example.user_service.UserServiceApplication
-2022-07-14 13:02:14,876 DEBUG org.springframework.web.context.support.GenericWebApplicationContext [main] Refreshing org.springframework.web.context.support.GenericWebApplicationContext@1ded7b14
-2022-07-14 13:02:16,014 DEBUG org.springframework.boot.autoconfigure.AutoConfigurationPackages [main] @EnableAutoConfiguration was declared on a class in the package 'com.example.user_service'. Automatic @Repository and @Entity scanning is enabled.
-2022-07-14 13:02:20,474 WARN org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration [main] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2022-07-14 13:02:20,542 DEBUG org.springframework.boot.context.properties.source.ConfigurationPropertySourcesPropertyResolver$DefaultResolver [main] Found key 'project.jwt.jwtExpirationMs' in PropertySource 'Config resource 'class path resource [application.properties]' via location 'optional:classpath:/'' with value of type String
-2022-07-14 13:02:21,045 DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping [main] 22 mappings in 'requestMappingHandlerMapping'
-2022-07-14 13:02:21,208 DEBUG org.springframework.web.servlet.handler.SimpleUrlHandlerMapping [main] Patterns [/upload/**] in 'resourceHandlerMapping'
-2022-07-14 13:02:21,274 DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter [main] ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
-2022-07-14 13:02:21,322 DEBUG org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver [main] ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
-2022-07-14 13:02:22,037 WARN org.springframework.boot.autoconfigure.batch.JpaBatchConfigurer [main] JPA does not support custom isolation levels, so locks may not be taken when launching Jobs
-2022-07-14 13:02:22,302 INFO org.springframework.boot.actuate.endpoint.web.EndpointLinksResolver [main] Exposing 1 endpoint(s) beneath base path '/actuator'
-2022-07-14 13:02:22,416 DEBUG org.springframework.boot.autoconfigure.logging.ConditionEvaluationReportLoggingListener [main] 
+2022-07-16 13:14:09,956 DEBUG org.springframework.boot.availability.ApplicationAvailabilityBean [main] Application availability state LivenessState changed to CORRECT
+2022-07-16 13:14:09,959 INFO org.springframework.boot.autoconfigure.batch.JobLauncherApplicationRunner [main] Running default command line with: []
+2022-07-16 13:14:09,960 DEBUG org.springframework.boot.availability.ApplicationAvailabilityBean [main] Application availability state ReadinessState changed to ACCEPTING_TRAFFIC
+2022-07-16 13:14:13,270 INFO org.springframework.web.servlet.DispatcherServlet [http-nio-8888-exec-1] Initializing Servlet 'dispatcherServlet'
+2022-07-16 13:14:13,271 DEBUG org.springframework.web.servlet.DispatcherServlet [http-nio-8888-exec-1] Detected StandardServletMultipartResolver
+2022-07-16 13:14:13,271 DEBUG org.springframework.web.servlet.DispatcherServlet [http-nio-8888-exec-1] Detected AcceptHeaderLocaleResolver
+2022-07-16 13:14:13,271 DEBUG org.springframework.web.servlet.DispatcherServlet [http-nio-8888-exec-1] Detected FixedThemeResolver
+2022-07-16 13:14:13,272 DEBUG org.springframework.web.servlet.DispatcherServlet [http-nio-8888-exec-1] Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@3ea4dcc5
+2022-07-16 13:14:13,273 DEBUG org.springframework.web.servlet.DispatcherServlet [http-nio-8888-exec-1] Detected org.springframework.web.servlet.support.SessionFlashMapManager@9930ff6
+2022-07-16 13:14:13,273 DEBUG org.springframework.web.servlet.DispatcherServlet [http-nio-8888-exec-1] enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+2022-07-16 13:14:13,273 INFO org.springframework.web.servlet.DispatcherServlet [http-nio-8888-exec-1] Completed initialization in 2 ms
+2022-07-16 13:14:13,290 DEBUG org.springframework.web.servlet.DispatcherServlet [http-nio-8888-exec-1] GET "/api/v1/email?email=abhihiwal2455@gmail.com&sender=Nikunj", parameters={masked}
+2022-07-16 13:14:13,300 DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping [http-nio-8888-exec-1] Mapped to com.example.user_service.controller.user.UserController#getUserByEmail(String, String)
+2022-07-16 13:14:13,867 DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor [http-nio-8888-exec-1] Using 'application/json', given [*/*] and supported [application/json]
+2022-07-16 13:14:13,874 DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor [http-nio-8888-exec-1] Writing [UserMailResponse(status=Success, message=Mail sent to user, userMailDto=null)]
+2022-07-16 13:14:13,884 DEBUG org.springframework.web.servlet.DispatcherServlet [http-nio-8888-exec-1] Completed 200 OK
+2022-07-16 13:14:16,023 DEBUG org.springframework.web.servlet.DispatcherServlet [http-nio-8888-exec-3] GET "/api/v1/email?email=abhihiwal2455@gmail.com&sender=Nikunj", parameters={masked}
+2022-07-16 13:14:16,024 DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping [http-nio-8888-exec-3] Mapped to com.example.user_service.controller.user.UserController#getUserByEmail(String, String)
+2022-07-16 13:14:16,026 DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor [http-nio-8888-exec-3] Using 'application/json', given [*/*] and supported [application/json]
+2022-07-16 13:14:16,026 DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor [http-nio-8888-exec-3] Writing [UserMailResponse(status=Success, message=Mail sent to user, userMailDto=null)]
+2022-07-16 13:14:16,027 DEBUG org.springframework.web.servlet.DispatcherServlet [http-nio-8888-exec-3] Completed 200 OK
+2022-07-16 13:17:21,488 DEBUG org.springframework.boot.availability.ApplicationAvailabilityBean [SpringApplicationShutdownHook] Application availability state ReadinessState changed from ACCEPTING_TRAFFIC to REFUSING_TRAFFIC
+2022-07-16 13:17:21,488 DEBUG org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext [SpringApplicationShutdownHook] Closing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@3cdf2c61, started on Sat Jul 16 13:14:02 IST 2022
+2022-07-16 13:17:26,485 INFO com.example.user_service.UserServiceApplication [main] Starting UserServiceApplication using Java 11.0.15 on nineleaps-ThinkPad-E480 with PID 19065 (/home/nineleaps/Downloads/project/allmicroservices/user_service/target/classes started by nineleaps in /home/nineleaps/Downloads/project/allmicroservices/user_service)
+2022-07-16 13:17:26,491 INFO com.example.user_service.UserServiceApplication [main] The following profiles are active: dev
+2022-07-16 13:17:26,492 DEBUG org.springframework.boot.SpringApplication [main] Loading source class com.example.user_service.UserServiceApplication
+2022-07-16 13:17:26,557 DEBUG org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext [main] Refreshing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@3cdf2c61
+2022-07-16 13:17:27,690 DEBUG org.springframework.boot.autoconfigure.AutoConfigurationPackages [main] @EnableAutoConfiguration was declared on a class in the package 'com.example.user_service'. Automatic @Repository and @Entity scanning is enabled.
+2022-07-16 13:17:28,682 DEBUG org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory [main] Code archive: /home/nineleaps/.m2/repository/org/springframework/boot/spring-boot/2.6.3/spring-boot-2.6.3.jar
+2022-07-16 13:17:28,682 DEBUG org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory [main] Code archive: /home/nineleaps/.m2/repository/org/springframework/boot/spring-boot/2.6.3/spring-boot-2.6.3.jar
+2022-07-16 13:17:28,683 DEBUG org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory [main] None of the document roots [src/main/webapp, public, static] point to a directory and will be ignored.
+2022-07-16 13:17:28,708 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [main] Tomcat initialized with port(s): 8888 (http)
+2022-07-16 13:17:28,840 DEBUG org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext [main] Published root WebApplicationContext as ServletContext attribute with name [org.springframework.web.context.WebApplicationContext.ROOT]
+2022-07-16 13:17:28,840 INFO org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext [main] Root WebApplicationContext: initialization completed in 2283 ms
+2022-07-16 13:17:29,034 DEBUG org.springframework.boot.web.servlet.ServletContextInitializerBeans [main] Mapping filters: filterRegistrationBean urls=[/*] order=-2147483647, springSecurityFilterChain urls=[/*] order=-100, filterRegistrationBean urls=[/*] order=2147483647, characterEncodingFilter urls=[/*] order=-2147483648
+2022-07-16 13:17:29,034 DEBUG org.springframework.boot.web.servlet.ServletContextInitializerBeans [main] Mapping servlets: dispatcherServlet urls=[/]
+2022-07-16 13:17:29,059 DEBUG org.springframework.boot.actuate.metrics.web.servlet.WebMvcMetricsFilter [main] Filter 'webMvcMetricsFilter' configured for use
+2022-07-16 13:17:29,060 DEBUG org.springframework.boot.web.servlet.filter.OrderedCharacterEncodingFilter [main] Filter 'characterEncodingFilter' configured for use
+2022-07-16 13:17:29,061 DEBUG org.springframework.boot.web.servlet.DelegatingFilterProxyRegistrationBean$1 [main] Filter 'springSecurityFilterChain' configured for use
+2022-07-16 13:17:32,183 WARN org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration [main] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2022-07-16 13:17:32,210 DEBUG org.springframework.boot.context.properties.source.ConfigurationPropertySourcesPropertyResolver$DefaultResolver [main] Found key 'project.jwt.jwtExpirationMs' in PropertySource 'Config resource 'class path resource [application.properties]' via location 'optional:classpath:/'' with value of type String
+2022-07-16 13:17:32,539 DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping [main] 22 mappings in 'requestMappingHandlerMapping'
+2022-07-16 13:17:32,569 DEBUG org.springframework.web.servlet.handler.SimpleUrlHandlerMapping [main] Patterns [/upload/**] in 'resourceHandlerMapping'
+2022-07-16 13:17:32,608 DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter [main] ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2022-07-16 13:17:32,648 DEBUG org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver [main] ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2022-07-16 13:17:33,131 WARN org.springframework.boot.autoconfigure.batch.JpaBatchConfigurer [main] JPA does not support custom isolation levels, so locks may not be taken when launching Jobs
+2022-07-16 13:17:33,277 INFO org.springframework.boot.actuate.endpoint.web.EndpointLinksResolver [main] Exposing 1 endpoint(s) beneath base path '/actuator'
+2022-07-16 13:17:33,327 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [main] Tomcat started on port(s): 8888 (http) with context path ''
+2022-07-16 13:17:33,369 DEBUG org.springframework.boot.autoconfigure.logging.ConditionEvaluationReportLoggingListener [main] 
 
 
 ============================
@@ -75,8 +110,14 @@ Positive matches:
    CacheMeterBinderProvidersConfiguration matched:
       - @ConditionalOnClass found required class 'io.micrometer.core.instrument.binder.MeterBinder' (OnClassCondition)
 
+   CacheMeterBinderProvidersConfiguration.RedisCacheMeterBinderProviderConfiguration matched:
+      - @ConditionalOnClass found required class 'org.springframework.data.redis.cache.RedisCache' (OnClassCondition)
+
    CacheMetricsAutoConfiguration matched:
       - @ConditionalOnBean (types: org.springframework.cache.CacheManager; SearchStrategy: all) found bean 'cacheManager' (OnBeanCondition)
+
+   CacheMetricsRegistrarConfiguration matched:
+      - @ConditionalOnBean (types: org.springframework.boot.actuate.metrics.cache.CacheMeterBinderProvider,io.micrometer.core.instrument.MeterRegistry; SearchStrategy: all) found beans 'simpleMeterRegistry', 'redisCacheMeterBinderProvider' (OnBeanCondition)
 
    ClientHttpConnectorAutoConfiguration matched:
       - @ConditionalOnClass found required class 'org.springframework.web.reactive.function.client.WebClient' (OnClassCondition)
@@ -127,6 +168,13 @@ Positive matches:
    DataSourceInitializationConfiguration matched:
       - @ConditionalOnClass found required class 'org.springframework.jdbc.datasource.init.DatabasePopulator' (OnClassCondition)
       - @ConditionalOnSingleCandidate (types: javax.sql.DataSource; SearchStrategy: all) found a primary bean from beans 'dataSource'; @ConditionalOnMissingBean (types: org.springframework.boot.autoconfigure.sql.init.SqlDataSourceScriptDatabaseInitializer,org.springframework.boot.autoconfigure.sql.init.SqlR2dbcScriptDatabaseInitializer; SearchStrategy: all) did not find any beans (OnBeanCondition)
+
+   DataSourceJmxConfiguration matched:
+      - @ConditionalOnProperty (spring.jmx.enabled=true) matched (OnPropertyCondition)
+
+   DataSourceJmxConfiguration.Hikari matched:
+      - @ConditionalOnClass found required class 'com.zaxxer.hikari.HikariDataSource' (OnClassCondition)
+      - @ConditionalOnSingleCandidate (types: javax.sql.DataSource; SearchStrategy: all) found a primary bean from beans 'dataSource' (OnBeanCondition)
 
    DataSourcePoolMetadataProvidersConfiguration.HikariPoolDataSourceMetadataProviderConfiguration matched:
       - @ConditionalOnClass found required class 'com.zaxxer.hikari.HikariDataSource' (OnClassCondition)
@@ -370,6 +418,20 @@ Positive matches:
    JvmMetricsAutoConfiguration#jvmThreadMetrics matched:
       - @ConditionalOnMissingBean (types: io.micrometer.core.instrument.binder.jvm.JvmThreadMetrics; SearchStrategy: all) did not find any beans (OnBeanCondition)
 
+   LettuceConnectionConfiguration matched:
+      - @ConditionalOnClass found required class 'io.lettuce.core.RedisClient' (OnClassCondition)
+      - @ConditionalOnProperty (spring.redis.client-type=lettuce) matched (OnPropertyCondition)
+
+   LettuceConnectionConfiguration#lettuceClientResources matched:
+      - @ConditionalOnMissingBean (types: io.lettuce.core.resource.ClientResources; SearchStrategy: all) did not find any beans (OnBeanCondition)
+
+   LettuceConnectionConfiguration#redisConnectionFactory matched:
+      - @ConditionalOnMissingBean (types: org.springframework.data.redis.connection.RedisConnectionFactory; SearchStrategy: all) did not find any beans (OnBeanCondition)
+
+   LettuceMetricsAutoConfiguration matched:
+      - @ConditionalOnClass found required classes 'io.lettuce.core.RedisClient', 'io.lettuce.core.metrics.MicrometerCommandLatencyRecorder' (OnClassCondition)
+      - @ConditionalOnBean (types: io.micrometer.core.instrument.MeterRegistry; SearchStrategy: all) found bean 'simpleMeterRegistry' (OnBeanCondition)
+
    LifecycleAutoConfiguration#defaultLifecycleProcessor matched:
       - @ConditionalOnMissingBean (names: lifecycleProcessor; SearchStrategy: current) did not find any beans (OnBeanCondition)
 
@@ -484,6 +546,34 @@ Positive matches:
    ReactiveSecurityAutoConfiguration matched:
       - @ConditionalOnClass found required classes 'reactor.core.publisher.Flux', 'org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity', 'org.springframework.security.web.server.WebFilterChainProxy', 'org.springframework.web.reactive.config.WebFluxConfigurer' (OnClassCondition)
 
+   RedisAutoConfiguration matched:
+      - @ConditionalOnClass found required class 'org.springframework.data.redis.core.RedisOperations' (OnClassCondition)
+
+   RedisAutoConfiguration#redisTemplate matched:
+      - @ConditionalOnSingleCandidate (types: org.springframework.data.redis.connection.RedisConnectionFactory; SearchStrategy: all) found a primary bean from beans 'redisConnectionFactory'; @ConditionalOnMissingBean (names: redisTemplate; SearchStrategy: all) did not find any beans (OnBeanCondition)
+
+   RedisAutoConfiguration#stringRedisTemplate matched:
+      - @ConditionalOnSingleCandidate (types: org.springframework.data.redis.connection.RedisConnectionFactory; SearchStrategy: all) found a primary bean from beans 'redisConnectionFactory'; @ConditionalOnMissingBean (types: org.springframework.data.redis.core.StringRedisTemplate; SearchStrategy: all) did not find any beans (OnBeanCondition)
+
+   RedisCacheConfiguration matched:
+      - @ConditionalOnClass found required class 'org.springframework.data.redis.connection.RedisConnectionFactory' (OnClassCondition)
+      - Cache org.springframework.boot.autoconfigure.cache.RedisCacheConfiguration REDIS cache type (CacheCondition)
+      - @ConditionalOnBean (types: org.springframework.data.redis.connection.RedisConnectionFactory; SearchStrategy: all) found bean 'redisConnectionFactory'; @ConditionalOnMissingBean (types: org.springframework.cache.CacheManager; SearchStrategy: all) did not find any beans (OnBeanCondition)
+
+   RedisReactiveAutoConfiguration matched:
+      - @ConditionalOnClass found required classes 'org.springframework.data.redis.connection.ReactiveRedisConnectionFactory', 'org.springframework.data.redis.core.ReactiveRedisTemplate', 'reactor.core.publisher.Flux' (OnClassCondition)
+
+   RedisReactiveAutoConfiguration#reactiveRedisTemplate matched:
+      - @ConditionalOnBean (types: org.springframework.data.redis.connection.ReactiveRedisConnectionFactory; SearchStrategy: all) found beans 'reactiveRedisConnectionFactory', 'redisConnectionFactory'; @ConditionalOnMissingBean (names: reactiveRedisTemplate; SearchStrategy: all) did not find any beans (OnBeanCondition)
+
+   RedisReactiveAutoConfiguration#reactiveStringRedisTemplate matched:
+      - @ConditionalOnBean (types: org.springframework.data.redis.connection.ReactiveRedisConnectionFactory; SearchStrategy: all) found beans 'reactiveRedisConnectionFactory', 'redisConnectionFactory'; @ConditionalOnMissingBean (names: reactiveStringRedisTemplate; SearchStrategy: all) did not find any beans (OnBeanCondition)
+
+   RedisRepositoriesAutoConfiguration matched:
+      - @ConditionalOnClass found required class 'org.springframework.data.redis.repository.configuration.EnableRedisRepositories' (OnClassCondition)
+      - @ConditionalOnProperty (spring.data.redis.repositories.enabled=true) matched (OnPropertyCondition)
+      - @ConditionalOnBean (types: org.springframework.data.redis.connection.RedisConnectionFactory; SearchStrategy: all) found bean 'redisConnectionFactory'; @ConditionalOnMissingBean (types: org.springframework.data.redis.repository.support.RedisRepositoryFactoryBean; SearchStrategy: all) did not find any beans (OnBeanCondition)
+
    RepositoryMetricsAutoConfiguration matched:
       - @ConditionalOnClass found required class 'org.springframework.data.repository.Repository' (OnClassCondition)
       - @ConditionalOnBean (types: io.micrometer.core.instrument.MeterRegistry; SearchStrategy: all) found bean 'simpleMeterRegistry' (OnBeanCondition)
@@ -557,12 +647,8 @@ Positive matches:
       - @ConditionalOnClass found required classes 'javax.servlet.Servlet', 'org.apache.catalina.startup.Tomcat', 'org.apache.coyote.UpgradeProtocol' (OnClassCondition)
       - @ConditionalOnMissingBean (types: org.springframework.boot.web.servlet.server.ServletWebServerFactory; SearchStrategy: current) did not find any beans (OnBeanCondition)
 
-   SimpleCacheConfiguration matched:
-      - Cache org.springframework.boot.autoconfigure.cache.SimpleCacheConfiguration automatic cache type (CacheCondition)
-      - @ConditionalOnMissingBean (types: org.springframework.cache.CacheManager; SearchStrategy: all) did not find any beans (OnBeanCondition)
-
    SimpleMetricsExportAutoConfiguration matched:
-      - @ConditionalOnEnabledMetricsExport management.metrics.export.simple.enabled is true (OnMetricsExportEnabledCondition)
+      - @ConditionalOnEnabledMetricsExport management.metrics.export.defaults.enabled is considered true (OnMetricsExportEnabledCondition)
       - @ConditionalOnBean (types: io.micrometer.core.instrument.Clock; SearchStrategy: all) found bean 'micrometerClock'; @ConditionalOnMissingBean (types: io.micrometer.core.instrument.MeterRegistry; SearchStrategy: all) did not find any beans (OnBeanCondition)
 
    SimpleMetricsExportAutoConfiguration#simpleConfig matched:
@@ -798,11 +884,11 @@ Negative matches:
 
    CacheMeterBinderProvidersConfiguration.CaffeineCacheMeterBinderProviderConfiguration:
       Did not match:
-         - @ConditionalOnClass did not find required classes 'org.springframework.cache.caffeine.CaffeineCache', 'com.github.benmanes.caffeine.cache.Cache' (OnClassCondition)
+         - @ConditionalOnClass did not find required class 'com.github.benmanes.caffeine.cache.Cache' (OnClassCondition)
 
    CacheMeterBinderProvidersConfiguration.EhCache2CacheMeterBinderProviderConfiguration:
       Did not match:
-         - @ConditionalOnClass did not find required classes 'org.springframework.cache.ehcache.EhCacheCache', 'net.sf.ehcache.Ehcache' (OnClassCondition)
+         - @ConditionalOnClass did not find required class 'net.sf.ehcache.Ehcache' (OnClassCondition)
 
    CacheMeterBinderProvidersConfiguration.HazelcastCacheMeterBinderProviderConfiguration:
       Did not match:
@@ -810,15 +896,7 @@ Negative matches:
 
    CacheMeterBinderProvidersConfiguration.JCacheCacheMeterBinderProviderConfiguration:
       Did not match:
-         - @ConditionalOnClass did not find required classes 'org.springframework.cache.jcache.JCacheCache', 'javax.cache.CacheManager' (OnClassCondition)
-
-   CacheMeterBinderProvidersConfiguration.RedisCacheMeterBinderProviderConfiguration:
-      Did not match:
-         - @ConditionalOnClass did not find required class 'org.springframework.data.redis.cache.RedisCache' (OnClassCondition)
-
-   CacheMetricsRegistrarConfiguration:
-      Did not match:
-         - @ConditionalOnBean (types: org.springframework.boot.actuate.metrics.cache.CacheMeterBinderProvider,io.micrometer.core.instrument.MeterRegistry; SearchStrategy: all) did not find any beans of type org.springframework.boot.actuate.metrics.cache.CacheMeterBinderProvider (OnBeanCondition)
+         - @ConditionalOnClass did not find required class 'javax.cache.CacheManager' (OnClassCondition)
 
    CachesEndpointAutoConfiguration:
       Did not match:
@@ -954,9 +1032,9 @@ Negative matches:
       Did not match:
          - DataSource Initialization did not find configured properties spring.datasource.data-username, spring.datasource.schema-password, spring.datasource.schema[0], spring.datasource.data[0], spring.datasource.data, spring.datasource.schema-username, spring.datasource.data-password, spring.datasource.initialization-mode, spring.datasource.schema, spring.datasource.sql-script-encoding, spring.datasource.separator, spring.datasource.platform, spring.datasource.continue-on-error (DataSourceInitializationConfiguration.SharedCredentialsDataSourceInitializationConfiguration.DataSourceInitializationCondition)
 
-   DataSourceJmxConfiguration:
+   DataSourceJmxConfiguration.TomcatDataSourceJmxConfiguration:
       Did not match:
-         - @ConditionalOnProperty (spring.jmx.enabled=true) found different value in property 'enabled' (OnPropertyCondition)
+         - @ConditionalOnClass did not find required class 'org.apache.tomcat.jdbc.pool.DataSourceProxy' (OnClassCondition)
 
    DataSourcePoolMetadataProvidersConfiguration.CommonsDbcp2PoolDataSourceMetadataProviderConfiguration:
       Did not match:
@@ -1056,9 +1134,7 @@ Negative matches:
 
    GenericCacheConfiguration:
       Did not match:
-         - @ConditionalOnBean (types: org.springframework.cache.Cache; SearchStrategy: all) did not find any beans of type org.springframework.cache.Cache (OnBeanCondition)
-      Matched:
-         - Cache org.springframework.boot.autoconfigure.cache.GenericCacheConfiguration automatic cache type (CacheCondition)
+         - Cache org.springframework.boot.autoconfigure.cache.GenericCacheConfiguration unknown cache type (CacheCondition)
 
    GraphiteMetricsExportAutoConfiguration:
       Did not match:
@@ -1208,6 +1284,10 @@ Negative matches:
       Did not match:
          - @ConditionalOnClass did not find required class 'org.springframework.data.jdbc.repository.config.AbstractJdbcConfiguration' (OnClassCondition)
 
+   JedisConnectionConfiguration:
+      Did not match:
+         - @ConditionalOnClass did not find required classes 'org.apache.commons.pool2.impl.GenericObjectPool', 'redis.clients.jedis.Jedis' (OnClassCondition)
+
    JerseyAutoConfiguration:
       Did not match:
          - @ConditionalOnClass did not find required class 'org.glassfish.jersey.server.spring.SpringComponentProvider' (OnClassCondition)
@@ -1238,13 +1318,13 @@ Negative matches:
 
    JmxAutoConfiguration:
       Did not match:
-         - @ConditionalOnProperty (spring.jmx.enabled=true) found different value in property 'enabled' (OnPropertyCondition)
+         - @ConditionalOnProperty (spring.jmx.enabled=true) did not find property 'enabled' (OnPropertyCondition)
       Matched:
          - @ConditionalOnClass found required class 'org.springframework.jmx.export.MBeanExporter' (OnClassCondition)
 
    JmxEndpointAutoConfiguration:
       Did not match:
-         - @ConditionalOnProperty (spring.jmx.enabled=true) found different value in property 'enabled' (OnPropertyCondition)
+         - @ConditionalOnProperty (spring.jmx.enabled=true) did not find property 'enabled' (OnPropertyCondition)
 
    JmxMetricsExportAutoConfiguration:
       Did not match:
@@ -1314,10 +1394,6 @@ Negative matches:
       Did not match:
          - @ConditionalOnClass did not find required class 'org.springframework.data.ldap.repository.LdapRepository' (OnClassCondition)
 
-   LettuceMetricsAutoConfiguration:
-      Did not match:
-         - @ConditionalOnClass did not find required class 'io.lettuce.core.metrics.MicrometerCommandLatencyRecorder' (OnClassCondition)
-
    LiquibaseAutoConfiguration:
       Did not match:
          - @ConditionalOnClass did not find required class 'liquibase.change.DatabaseChange' (OnClassCondition)
@@ -1340,7 +1416,10 @@ Negative matches:
 
    MailHealthContributorAutoConfiguration:
       Did not match:
-         - @ConditionalOnClass did not find required class 'org.springframework.mail.javamail.JavaMailSenderImpl' (OnClassCondition)
+         - @ConditionalOnBean (types: org.springframework.mail.javamail.JavaMailSenderImpl; SearchStrategy: all) did not find any beans of type org.springframework.mail.javamail.JavaMailSenderImpl (OnBeanCondition)
+      Matched:
+         - @ConditionalOnClass found required class 'org.springframework.mail.javamail.JavaMailSenderImpl' (OnClassCondition)
+         - @ConditionalOnEnabledHealthIndicator management.health.defaults.enabled is considered true (OnEnabledHealthIndicatorCondition)
 
    MailSenderAutoConfiguration:
       Did not match:
@@ -1348,7 +1427,7 @@ Negative matches:
 
    MailSenderValidatorAutoConfiguration:
       Did not match:
-         - @ConditionalOnSingleCandidate did not find required type 'org.springframework.mail.javamail.JavaMailSenderImpl' (OnBeanCondition)
+         - @ConditionalOnProperty (spring.mail.test-connection) did not find property 'test-connection' (OnPropertyCondition)
 
    ManagementContextAutoConfiguration.DifferentManagementContextConfiguration:
       Did not match:
@@ -1444,9 +1523,7 @@ Negative matches:
 
    NoOpCacheConfiguration:
       Did not match:
-         - @ConditionalOnMissingBean (types: org.springframework.cache.CacheManager; SearchStrategy: all) found beans of type 'org.springframework.cache.CacheManager' cacheManager (OnBeanCondition)
-      Matched:
-         - Cache org.springframework.boot.autoconfigure.cache.NoOpCacheConfiguration automatic cache type (CacheCondition)
+         - Cache org.springframework.boot.autoconfigure.cache.NoOpCacheConfiguration unknown cache type (CacheCondition)
 
    NoOpMeterRegistryConfiguration:
       Did not match:
@@ -1584,29 +1661,17 @@ Negative matches:
       Matched:
          - @ConditionalOnClass found required class 'org.springframework.http.ReactiveHttpInputMessage' (OnClassCondition)
 
-   RedisAutoConfiguration:
-      Did not match:
-         - @ConditionalOnClass did not find required class 'org.springframework.data.redis.core.RedisOperations' (OnClassCondition)
-
-   RedisCacheConfiguration:
-      Did not match:
-         - @ConditionalOnClass did not find required class 'org.springframework.data.redis.connection.RedisConnectionFactory' (OnClassCondition)
-
    RedisHealthContributorAutoConfiguration:
       Did not match:
-         - @ConditionalOnClass did not find required class 'org.springframework.data.redis.connection.RedisConnectionFactory' (OnClassCondition)
-
-   RedisReactiveAutoConfiguration:
-      Did not match:
-         - @ConditionalOnClass did not find required class 'org.springframework.data.redis.connection.ReactiveRedisConnectionFactory' (OnClassCondition)
+         - @ConditionalOnEnabledHealthIndicator management.health.redis.enabled is false (OnEnabledHealthIndicatorCondition)
+      Matched:
+         - @ConditionalOnClass found required class 'org.springframework.data.redis.connection.RedisConnectionFactory' (OnClassCondition)
 
    RedisReactiveHealthContributorAutoConfiguration:
       Did not match:
-         - @ConditionalOnClass did not find required class 'org.springframework.data.redis.connection.ReactiveRedisConnectionFactory' (OnClassCondition)
-
-   RedisRepositoriesAutoConfiguration:
-      Did not match:
-         - @ConditionalOnClass did not find required class 'org.springframework.data.redis.repository.configuration.EnableRedisRepositories' (OnClassCondition)
+         - @ConditionalOnEnabledHealthIndicator management.health.redis.enabled is false (OnEnabledHealthIndicatorCondition)
+      Matched:
+         - @ConditionalOnClass found required classes 'org.springframework.data.redis.connection.ReactiveRedisConnectionFactory', 'reactor.core.publisher.Flux' (OnClassCondition)
 
    RepositoryRestMvcAutoConfiguration:
       Did not match:
@@ -1667,6 +1732,10 @@ Negative matches:
    SignalFxMetricsExportAutoConfiguration:
       Did not match:
          - @ConditionalOnClass did not find required class 'io.micrometer.signalfx.SignalFxMeterRegistry' (OnClassCondition)
+
+   SimpleCacheConfiguration:
+      Did not match:
+         - Cache org.springframework.boot.autoconfigure.cache.SimpleCacheConfiguration unknown cache type (CacheCondition)
 
    SolrAutoConfiguration:
       Did not match:
@@ -1769,7 +1838,7 @@ Negative matches:
 
    WebServiceTemplateAutoConfiguration:
       Did not match:
-         - @ConditionalOnClass did not find required class 'org.springframework.oxm.Marshaller' (OnClassCondition)
+         - @ConditionalOnClass did not find required class 'org.springframework.ws.client.core.WebServiceTemplate' (OnClassCondition)
 
    WebServicesAutoConfiguration:
       Did not match:
@@ -1837,90 +1906,106 @@ Unconditional classes:
 
 
 
-2022-07-14 13:02:22,455 INFO com.example.user_service.service.medicine.UserMedicineServiceImplTest [main] Started UserMedicineServiceImplTest in 7.956 seconds (JVM running for 9.935)
-2022-07-14 13:02:22,516 DEBUG org.springframework.boot.availability.ApplicationAvailabilityBean [main] Application availability state LivenessState changed to CORRECT
-2022-07-14 13:02:22,518 INFO org.springframework.boot.autoconfigure.batch.JobLauncherApplicationRunner [main] Running default command line with: []
-2022-07-14 13:02:22,519 DEBUG org.springframework.boot.availability.ApplicationAvailabilityBean [main] Application availability state ReadinessState changed to ACCEPTING_TRAFFIC
-2022-07-14 13:02:23,000 INFO com.example.user_service.service.medicine.UserMedicineServiceImpl [main] Sync Medicine History for medicine : 1234
-2022-07-14 13:02:23,007 ERROR com.example.user_service.config.log.Logger [main] MEDICINE_SERVICE
-2022-07-14 13:02:23,037 INFO com.example.user_service.service.medicine.UserMedicineServiceImpl [main] Fetch medicines of a user : 1234
-2022-07-14 13:02:23,038 ERROR com.example.user_service.config.log.Logger [main] MEDICINE_SERVICE
-2022-07-14 13:02:23,053 INFO com.example.user_service.service.medicine.UserMedicineServiceImpl [main] Sync medicines for user : 1234
-2022-07-14 13:02:23,063 INFO com.example.user_service.service.medicine.UserMedicineServiceImpl [main] Sync Medicine History for medicine : 1234
-2022-07-14 13:02:23,075 INFO com.example.user_service.service.medicine.UserMedicineServiceImpl [main] Get Imaages for medicine :123
-2022-07-14 13:02:23,076 ERROR com.example.user_service.config.log.Logger [main] MEDICINE_SERVICE
-2022-07-14 13:02:23,085 INFO com.example.user_service.service.medicine.UserMedicineServiceImpl [main] Sync Medicine History for medicine : 1234
-2022-07-14 13:02:23,097 INFO com.example.user_service.service.medicine.UserMedicineServiceImpl [main] Sync medicines for user : 1234
-2022-07-14 13:02:23,108 INFO com.example.user_service.service.medicine.UserMedicineServiceImpl [main] Sync medicines for user : 1234
-2022-07-14 13:02:23,119 INFO com.example.user_service.service.medicine.UserMedicineServiceImpl [main] Get Imaages for medicine :123
-2022-07-14 13:02:23,140 INFO com.example.user_service.service.medicine.UserMedicineServiceImpl [main] Sync medicines for user : 1234
-2022-07-14 13:02:23,140 ERROR com.example.user_service.config.log.Logger [main] MEDICINE_SERVICE
-2022-07-14 13:02:23,150 INFO com.example.user_service.service.medicine.UserMedicineServiceImpl [main] Get Imaages for medicine :123
-2022-07-14 13:02:23,161 INFO com.example.user_service.service.medicine.UserMedicineServiceImpl [main] Fetch medicines of a user : 1234
-2022-07-14 13:02:23,190 INFO com.example.user_service.service.medicine.UserMedicineServiceImpl [main] Fetch medicines of a user : 1234
-2022-07-14 13:02:23,210 INFO com.example.user_service.service.medicine.UserMedicineServiceImpl [main] Fetch medicines of a user : 1234
-2022-07-14 13:02:23,219 INFO com.example.user_service.service.medicine.UserMedicineServiceImpl [main] Get Imaages for medicine :123
-2022-07-14 13:02:23,249 INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper [main] Neither @ContextConfiguration nor @ContextHierarchy found for test class [com.example.user_service.service.user.UserServiceTest], using SpringBootContextLoader
-2022-07-14 13:02:23,258 INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper [main] Found @SpringBootConfiguration com.example.user_service.UserServiceApplication for test class com.example.user_service.service.user.UserServiceTest
-2022-07-14 13:02:23,260 DEBUG org.springframework.boot.test.context.SpringBootTestContextBootstrapper [main] @TestExecutionListeners is not present for class [com.example.user_service.service.user.UserServiceTest]: using defaults.
-2022-07-14 13:02:23,261 INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper [main] Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.security.test.context.support.WithSecurityContextTestExecutionListener, org.springframework.security.test.context.support.ReactorContextTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.event.ApplicationEventsTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.test.context.event.EventPublishingTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener]
-2022-07-14 13:02:23,261 INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper [main] Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@428943a4, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@6ca95b1e, org.springframework.test.context.event.ApplicationEventsTestExecutionListener@7c305624, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@7b4fbedb, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@73534675, org.springframework.test.context.support.DirtiesContextTestExecutionListener@550482aa, org.springframework.test.context.transaction.TransactionalTestExecutionListener@2b7b6f58, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@2dc4b58a, org.springframework.security.test.context.support.WithSecurityContextTestExecutionListener@44cd3ea9, org.springframework.test.context.event.EventPublishingTestExecutionListener@352df548, org.springframework.security.test.context.support.ReactorContextTestExecutionListener@45dc4d1a, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@4dbcc8ce, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@60a98fa6, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@3af4b14e, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@1de78f97, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@36b6ce5d, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener@1a4eb392]
-2022-07-14 13:02:23,448 INFO com.example.user_service.service.user.UserServiceImpl [main] Get User Details :gtgt45
-2022-07-14 13:02:23,457 INFO com.example.user_service.service.user.UserServiceImpl [main] Save user :UserEntityDTO(userName=Nikunj, email=nikkubisht112@gmail.com)
-2022-07-14 13:02:23,459 ERROR com.example.user_service.config.log.Logger [main] USER_SERVICE
-2022-07-14 13:02:23,468 ERROR com.example.user_service.config.log.Logger [main] USER_SERVICE
-2022-07-14 13:02:23,476 INFO com.example.user_service.service.user.UserServiceImpl [main] Get User Details :gtgt45
-2022-07-14 13:02:23,476 ERROR com.example.user_service.config.log.Logger [main] USER_SERVICE
-2022-07-14 13:02:23,485 INFO com.example.user_service.service.user.UserServiceImpl [main] Get User by mail : bishtnikunj94@gmail.com
-2022-07-14 13:02:23,507 INFO com.example.user_service.service.user.UserServiceImpl [main] Save user :UserEntityDTO(userName=Nikunj, email=nikkubisht112@gmail.com)
-2022-07-14 13:02:23,528 ERROR com.example.user_service.config.log.Logger [main] USER_SERVICE
-2022-07-14 13:02:23,537 INFO com.example.user_service.service.user.UserServiceImpl [main] Generate Pdf for medicine : 71581
-2022-07-14 13:02:23,547 INFO com.example.user_service.service.user.UserServiceImpl [main] Save user :UserEntityDTO(userName=Nikunj, email=nikkubisht112@gmail.com)
-2022-07-14 13:02:23,558 INFO com.example.user_service.service.user.UserServiceImpl [main] Save user :UserEntityDTO(userName=Nikunj, email=nikkubisht112@gmail.com)
-2022-07-14 13:02:23,568 INFO com.example.user_service.service.user.UserServiceImpl [main] Generate Pdf for medicine : 71581
-2022-07-14 13:02:23,576 INFO com.example.user_service.service.user.UserServiceImpl [main] Get User by mail : bishtnikunj94@gmail.com
-2022-07-14 13:02:23,577 ERROR com.example.user_service.config.log.Logger [main] USER_SERVICE
-2022-07-14 13:02:23,585 INFO com.example.user_service.service.user.UserServiceImpl [main] Get User Details :73578dfd-e7c9-4381-a348-113e72d80fa2
-2022-07-14 13:02:23,603 ERROR com.example.user_service.config.log.Logger [main] USER_SERVICE
-2022-07-14 13:02:23,609 INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper [main] Neither @ContextConfiguration nor @ContextHierarchy found for test class [com.example.user_service.service.caretaker.CareTakerServiceImplTest], using SpringBootContextLoader
-2022-07-14 13:02:23,614 INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper [main] Found @SpringBootConfiguration com.example.user_service.UserServiceApplication for test class com.example.user_service.service.caretaker.CareTakerServiceImplTest
-2022-07-14 13:02:23,615 DEBUG org.springframework.boot.test.context.SpringBootTestContextBootstrapper [main] @TestExecutionListeners is not present for class [com.example.user_service.service.caretaker.CareTakerServiceImplTest]: using defaults.
-2022-07-14 13:02:23,615 INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper [main] Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.security.test.context.support.WithSecurityContextTestExecutionListener, org.springframework.security.test.context.support.ReactorContextTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.event.ApplicationEventsTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.test.context.event.EventPublishingTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener]
-2022-07-14 13:02:23,615 INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper [main] Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@481d6644, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@3d3362f5, org.springframework.test.context.event.ApplicationEventsTestExecutionListener@1e717745, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@3ba468ec, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@1828069a, org.springframework.test.context.support.DirtiesContextTestExecutionListener@3e2afba0, org.springframework.test.context.transaction.TransactionalTestExecutionListener@2b74787f, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@338f96f5, org.springframework.security.test.context.support.WithSecurityContextTestExecutionListener@6b4b5ac8, org.springframework.test.context.event.EventPublishingTestExecutionListener@2554bfa, org.springframework.security.test.context.support.ReactorContextTestExecutionListener@a6a7c4f, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@451d6bc9, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@7431f4b8, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@5c936b5f, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@5c2fc86, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@2baf9cd4, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener@50c0392d]
-2022-07-14 13:02:23,930 INFO com.example.user_service.service.caretaker.CareTakerServiceImpl [main] Send Image to Caretaker with Id : 1234
-2022-07-14 13:02:23,942 INFO com.example.user_service.service.caretaker.CareTakerServiceImpl [main] Delete Patient request : 1234
-2022-07-14 13:02:23,957 INFO com.example.user_service.service.caretaker.CareTakerServiceImpl [main] Fetch user Caretakers : 1234
-2022-07-14 13:02:23,965 INFO com.example.user_service.service.caretaker.CareTakerServiceImpl [main] Fetch patients for user : 1234 
-2022-07-14 13:02:23,965 ERROR com.example.user_service.config.log.Logger [main] CARETAKER_SERVICE
-2022-07-14 13:02:23,975 INFO com.example.user_service.service.caretaker.CareTakerServiceImpl [main] Fetch user Caretakers : 1234
-2022-07-14 13:02:23,990 INFO com.example.user_service.service.caretaker.CareTakerServiceImpl [main] Fetch patients for user : 1234 
-2022-07-14 13:02:24,001 INFO com.example.user_service.service.caretaker.CareTakerServiceImpl [main] Fetch user Caretakers : 1234
-2022-07-14 13:02:24,001 ERROR com.example.user_service.config.log.Logger [main] CARETAKER_SERVICE
-2022-07-14 13:02:24,008 INFO com.example.user_service.service.caretaker.CareTakerServiceImpl [main] Fetch Patients requests for user : 1234
-2022-07-14 13:02:24,015 INFO com.example.user_service.service.caretaker.CareTakerServiceImpl [main] Send Image to Caretaker with Id : 1234
-2022-07-14 13:02:24,016 ERROR com.example.user_service.config.log.Logger [main] CARETAKER_SERVICE
-2022-07-14 13:02:24,016 ERROR com.example.user_service.service.caretaker.CareTakerServiceImpl [main] CaretakerService :: SQL error!
-2022-07-14 13:02:24,024 INFO com.example.user_service.service.caretaker.CareTakerServiceImpl [main] Update request status for Id: 1234
-2022-07-14 13:02:24,033 INFO com.example.user_service.service.caretaker.CareTakerServiceImpl [main] Delete Patient request : 1234
-2022-07-14 13:02:24,043 INFO com.example.user_service.service.caretaker.CareTakerServiceImpl [main] Fetch patients for user : 1234 
-2022-07-14 13:02:24,053 INFO com.example.user_service.service.caretaker.CareTakerServiceImpl [main] Fetch Patients requests for user : 1234
-2022-07-14 13:02:24,053 ERROR com.example.user_service.config.log.Logger [main] CARETAKER_SERVICE
-2022-07-14 13:02:24,061 INFO com.example.user_service.service.caretaker.CareTakerServiceImpl [main] Update request status for Id: 1234
-2022-07-14 13:02:24,071 INFO com.example.user_service.service.caretaker.CareTakerServiceImpl [main] Saving caretaker UserCaretakerDTO(patientName=nikku, reqStatus=false, caretakerId=1234, patientId=5678, caretakerUsername=shanky, sentBy=P)
-2022-07-14 13:02:24,101 INFO com.example.user_service.service.caretaker.CareTakerServiceImpl [main] Saving caretaker UserCaretakerDTO(patientName=nikku, reqStatus=false, caretakerId=1234, patientId=5678, caretakerUsername=shanky, sentBy=P)
-2022-07-14 13:02:24,102 ERROR com.example.user_service.config.log.Logger [main] CARETAKER_SERVICE
-2022-07-14 13:02:24,111 INFO com.example.user_service.service.caretaker.CareTakerServiceImpl [main] Fetch patients for user : 1234 
-2022-07-14 13:02:24,120 INFO com.example.user_service.service.caretaker.CareTakerServiceImpl [main] Update request status for Id: 1234
-2022-07-14 13:02:24,120 ERROR com.example.user_service.config.log.Logger [main] CARETAKER_SERVICE
-2022-07-14 13:02:24,128 INFO com.example.user_service.service.caretaker.CareTakerServiceImpl [main] Fetch Patients requests for user : 1234
-2022-07-14 13:02:24,137 INFO com.example.user_service.service.caretaker.CareTakerServiceImpl [main] Fetch user Caretakers : 1234
-2022-07-14 13:02:24,146 INFO com.example.user_service.service.caretaker.CareTakerServiceImpl [main] Saving caretaker UserCaretakerDTO(patientName=nikku, reqStatus=false, caretakerId=1234, patientId=5678, caretakerUsername=shanky, sentBy=P)
-2022-07-14 13:02:24,155 INFO com.example.user_service.service.caretaker.CareTakerServiceImpl [main] Delete Patient request : 1234
-2022-07-14 13:02:24,155 ERROR com.example.user_service.config.log.Logger [main] CARETAKER_SERVICE
-2022-07-14 13:02:24,164 INFO com.example.user_service.service.caretaker.CareTakerServiceImpl [main] Fetch Patients requests for user : 1234
-2022-07-14 13:02:24,170 INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper [main] Neither @ContextConfiguration nor @ContextHierarchy found for test class [com.example.user_service.service.user.UserDetailServiceImplTest], using SpringBootContextLoader
-2022-07-14 13:02:24,172 INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper [main] Found @SpringBootConfiguration com.example.user_service.UserServiceApplication for test class com.example.user_service.service.user.UserDetailServiceImplTest
-2022-07-14 13:02:24,173 DEBUG org.springframework.boot.test.context.SpringBootTestContextBootstrapper [main] @TestExecutionListeners is not present for class [com.example.user_service.service.user.UserDetailServiceImplTest]: using defaults.
-2022-07-14 13:02:24,173 INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper [main] Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.security.test.context.support.WithSecurityContextTestExecutionListener, org.springframework.security.test.context.support.ReactorContextTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.event.ApplicationEventsTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.test.context.event.EventPublishingTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener]
-2022-07-14 13:02:24,174 INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper [main] Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@6ebdd981, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@5ecd22e7, org.springframework.test.context.event.ApplicationEventsTestExecutionListener@4b2be6f8, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@1bd6831d, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@1b272037, org.springframework.test.context.support.DirtiesContextTestExecutionListener@2c4af3ae, org.springframework.test.context.transaction.TransactionalTestExecutionListener@3842ccf9, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@17236e87, org.springframework.security.test.context.support.WithSecurityContextTestExecutionListener@35a7c2cc, org.springframework.test.context.event.EventPublishingTestExecutionListener@4e0b9055, org.springframework.security.test.context.support.ReactorContextTestExecutionListener@6000b869, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@6cdbb5b8, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@6761bb4d, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@75fa16cc, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@105c3bea, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@211b2a2c, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener@4b4a5691]
-2022-07-14 13:02:24,209 DEBUG org.springframework.web.context.support.GenericWebApplicationContext [SpringApplicationShutdownHook] Closing org.springframework.web.context.support.GenericWebApplicationContext@1ded7b14, started on Thu Jul 14 13:02:14 IST 2022
+2022-07-16 13:17:33,378 INFO com.example.user_service.UserServiceApplication [main] Started UserServiceApplication in 7.439 seconds (JVM running for 8.061)
+2022-07-16 13:17:33,439 DEBUG org.springframework.boot.availability.ApplicationAvailabilityBean [main] Application availability state LivenessState changed to CORRECT
+2022-07-16 13:17:33,440 INFO org.springframework.boot.autoconfigure.batch.JobLauncherApplicationRunner [main] Running default command line with: []
+2022-07-16 13:17:33,442 DEBUG org.springframework.boot.availability.ApplicationAvailabilityBean [main] Application availability state ReadinessState changed to ACCEPTING_TRAFFIC
+2022-07-16 13:17:41,433 INFO org.springframework.web.servlet.DispatcherServlet [http-nio-8888-exec-2] Initializing Servlet 'dispatcherServlet'
+2022-07-16 13:17:41,434 DEBUG org.springframework.web.servlet.DispatcherServlet [http-nio-8888-exec-2] Detected StandardServletMultipartResolver
+2022-07-16 13:17:41,434 DEBUG org.springframework.web.servlet.DispatcherServlet [http-nio-8888-exec-2] Detected AcceptHeaderLocaleResolver
+2022-07-16 13:17:41,434 DEBUG org.springframework.web.servlet.DispatcherServlet [http-nio-8888-exec-2] Detected FixedThemeResolver
+2022-07-16 13:17:41,435 DEBUG org.springframework.web.servlet.DispatcherServlet [http-nio-8888-exec-2] Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@33012e6f
+2022-07-16 13:17:41,436 DEBUG org.springframework.web.servlet.DispatcherServlet [http-nio-8888-exec-2] Detected org.springframework.web.servlet.support.SessionFlashMapManager@3cc9bde9
+2022-07-16 13:17:41,436 DEBUG org.springframework.web.servlet.DispatcherServlet [http-nio-8888-exec-2] enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+2022-07-16 13:17:41,436 INFO org.springframework.web.servlet.DispatcherServlet [http-nio-8888-exec-2] Completed initialization in 2 ms
+2022-07-16 13:17:41,452 DEBUG org.springframework.web.servlet.DispatcherServlet [http-nio-8888-exec-2] GET "/api/v1/email?email=abhihiwal2455@gmail.com&sender=Nikunj", parameters={masked}
+2022-07-16 13:17:41,461 DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping [http-nio-8888-exec-2] Mapped to com.example.user_service.controller.user.UserController#getUserByEmail(String, String)
+2022-07-16 13:17:41,948 DEBUG org.springframework.web.servlet.DispatcherServlet [http-nio-8888-exec-2] Failed to complete request: java.lang.NullPointerException
+2022-07-16 13:17:41,958 ERROR org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/].[dispatcherServlet] [http-nio-8888-exec-2] Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is java.lang.NullPointerException] with root cause
+java.lang.NullPointerException: null
+	at com.example.user_service.controller.user.UserController.getUserByEmail(UserController.java:109)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:205)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:150)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:808)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1067)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:963)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:898)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:655)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:764)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:227)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:327)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:122)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:126)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:81)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:109)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:149)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:103)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:89)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:110)
+	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:80)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:55)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:211)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:183)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:354)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:267)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.boot.actuate.metrics.web.servlet.WebMvcMetricsFilter.doFilterInternal(WebMvcMetricsFilter.java:96)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:197)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:540)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:135)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:357)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:382)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:895)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1732)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2022-07-16 13:17:41,962 DEBUG org.springframework.web.servlet.DispatcherServlet [http-nio-8888-exec-2] "ERROR" dispatch for GET "/error?email=abhihiwal2455@gmail.com&sender=Nikunj", parameters={masked}
+2022-07-16 13:17:41,966 DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping [http-nio-8888-exec-2] Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2022-07-16 13:17:41,992 DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor [http-nio-8888-exec-2] Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2022-07-16 13:17:41,993 DEBUG org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor [http-nio-8888-exec-2] Writing [{timestamp=Sat Jul 16 13:17:41 IST 2022, status=500, error=Internal Server Error, path=/api/v1/email (truncated)...]
+2022-07-16 13:17:42,052 DEBUG org.springframework.web.servlet.DispatcherServlet [http-nio-8888-exec-2] Exiting from "ERROR" dispatch, status 500
+2022-07-16 13:18:09,662 DEBUG org.springframework.boot.availability.ApplicationAvailabilityBean [SpringApplicationShutdownHook] Application availability state ReadinessState changed from ACCEPTING_TRAFFIC to REFUSING_TRAFFIC
+2022-07-16 13:18:09,663 DEBUG org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext [SpringApplicationShutdownHook] Closing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@3cdf2c61, started on Sat Jul 16 13:17:26 IST 2022

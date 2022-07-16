@@ -8,6 +8,7 @@ import lombok.ToString;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Data
 @NoArgsConstructor
@@ -15,7 +16,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "user_details")
 @ToString(exclude = "")
-public class UserDetails {
+public class UserDetails implements Serializable {
     @Id
     @Column(name = "userdet_id",nullable = false)
     @GeneratedValue(generator = "UUID")
@@ -79,5 +80,9 @@ public class UserDetails {
     )
     @JsonIgnore
     private UserEntity user;
+    public UserDetails(String fcmToken,String picPath){
+        this.fcmToken=fcmToken;
+        this.picPath = picPath;
+    }
 }
 ///

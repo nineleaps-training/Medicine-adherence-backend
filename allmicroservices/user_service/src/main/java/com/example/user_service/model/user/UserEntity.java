@@ -3,12 +3,14 @@ package com.example.user_service.model.user;
 
 import com.example.user_service.model.medicine.UserMedicines;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.jsonschema.JsonSerializableSchema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -19,7 +21,7 @@ import java.util.List;
 @Table(name = "user")
 @NamedEntityGraph(name = "userDetail_graph",
         attributeNodes = @NamedAttributeNode(value = "userDetails"))
-public class UserEntity {
+public class UserEntity implements Serializable {
 
     @Id
     @Column(name = "user_id", nullable = false)
@@ -47,6 +49,7 @@ public class UserEntity {
             mappedBy = "user",
             fetch = FetchType.LAZY
     )
+
     private UserDetails userDetails;
 
 
@@ -58,6 +61,11 @@ public class UserEntity {
     @JsonIgnore
     private List<UserMedicines> userMedicines;
 
+    public UserEntity(LocalDateTime lastLogin,LocalDateTime createdAt,UserDetails userDetails){
+        this.lastLogin = lastLogin;
+        this.createdAt = createdAt;
+        this.userDetails = userDetails;
+    }
+
 
 }
-///

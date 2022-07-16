@@ -172,14 +172,13 @@ public class CareTakerServiceImpl implements CareTakerService {
         logger.info("Send Image to Caretaker with Id : {}", caretakerid);
         try {
 
-            File file = new File(System.getProperty("user.dir") + "/src/main/upload/static/images");
-            if (!file.exists()) {
-                file.mkdir();
-            }
             Path path = Paths.get(System.getProperty("user.dir") + "/src/main/upload/static/images", filename.concat(".").concat("jpg"));
             Files.write(path, multipartFile.getBytes());
 
             UserMedicines userMedicines = userMedicineRepository.getMedById(medId);
+            if(userMedicines==null){
+                throw new UserCaretakerException(Messages.DATA_NOT_FOUND);
+            }
             String userName = userMedicines.getUserEntity().getUserName();
             Image image = new Image();
             image.setImageUrl(path.getFileName().toString());

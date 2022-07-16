@@ -7,6 +7,7 @@ import com.example.user_service.model.user.UserEntity;
 import com.example.user_service.pojos.dto.user.UserEntityDTO;
 import com.example.user_service.pojos.dto.user.UserMailDto;
 import com.example.user_service.pojos.response.medicine.PdfLinkResponse;
+import com.example.user_service.pojos.response.user.GetUsersresponse;
 import com.example.user_service.pojos.response.user.UserResponse;
 
 import java.io.IOException;
@@ -19,7 +20,7 @@ public interface UserService {
 
      UserResponse saveUser(UserEntityDTO userEntityDTO, String fcmToken, String picPath) throws UserExceptionMessage, GoogleSsoException;
 
-     CompletableFuture<List<UserEntity>> getUsers() throws UserExceptionMessage;
+     GetUsersresponse getUsers() throws UserExceptionMessage;
 
      UserEntity getUserById(String userId) throws UserExceptionMessage, UserMedicineException, ExecutionException, InterruptedException;
 
