@@ -2,18 +2,14 @@ package com.example.user_service.security;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import com.example.user_service.exception.user.UnauthorizedUserException;
 import com.example.user_service.exception.user.UserExceptionMessage;
 import com.example.user_service.util.Messages;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.HandlerInterceptor;
-
 import com.example.user_service.config.filter.UserDetailService;
 import com.example.user_service.util.JwtUtil;
 

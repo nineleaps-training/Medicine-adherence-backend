@@ -72,7 +72,8 @@ public class UserDetails implements Serializable {
     private String pastMedication;
 
     @OneToOne(
-            fetch = FetchType.LAZY
+            fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL
     )
     @JoinColumn(
             name = "user_user_id",

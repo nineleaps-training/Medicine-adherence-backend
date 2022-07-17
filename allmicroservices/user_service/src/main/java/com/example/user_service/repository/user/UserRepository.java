@@ -16,7 +16,7 @@ public interface UserRepository extends PagingAndSortingRepository<UserEntity, I
     @EntityGraph(type = EntityGraph.EntityGraphType.FETCH, value = "userDetail_graph")
     List<UserEntity> findByNameIgnoreCase(String userName);
 
-    @Query("select new com.example.user_service.pojos.dto.user.UserMailDto(u.userName,u.email,d.picPath) from UserEntity u INNER JOIN u.userDetails as d where lower(u.email) like lower(?1)")
+    @Query("select new com.example.user_service.pojos.dto.user.UserMailDto(u.userName,u.email,d.picPath) from UserEntity u INNER JOIN u.userDetails  d where lower(u.email) like lower(?1)")
     UserMailDto searchByMail(String email);
 
     @Query("SELECT u from UserEntity u where u.userId = ?1")

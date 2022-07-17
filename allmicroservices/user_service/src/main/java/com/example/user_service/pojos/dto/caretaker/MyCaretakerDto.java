@@ -6,11 +6,12 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class MyCaretakerDto {
+public class MyCaretakerDto implements Serializable {
 
     @NotNull(message = "CareTaker username should not be null")
     @NotBlank(message = "CareTaker username should not be Empty")

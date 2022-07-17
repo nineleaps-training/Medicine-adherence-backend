@@ -49,7 +49,6 @@ public class UserEntity implements Serializable {
             mappedBy = "user",
             fetch = FetchType.LAZY
     )
-
     private UserDetails userDetails;
 
 

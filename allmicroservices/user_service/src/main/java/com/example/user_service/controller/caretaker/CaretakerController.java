@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.Objects;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -138,12 +139,13 @@ public class CaretakerController {
 
     // where the patients can view all his caretakers
     @GetMapping(value = "/caretakers")
+
     public ResponseEntity<CaretakerListResponse> getMyCaretakers(@NotNull
                                                                  @NotBlank
                                                                  @RequestParam(name = "patientId") String userId, @NotNull
-                                                                 @NotBlank
+                                                                 @Min(value = 0)
                                                                  @RequestParam(name = "pageNo") Integer pageNo, @NotNull
-                                                                 @NotBlank
+                                                                 @Min(value = 1)
                                                                  @RequestParam(name = "pageSize") Integer pageSize) throws UserCaretakerException {
         return new ResponseEntity<>(careTakerService.getMyCaretakers(userId, pageNo, pageSize), HttpStatus.OK);
     }

@@ -23,6 +23,7 @@ import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -129,6 +130,7 @@ public class CareTakerServiceImpl implements CareTakerService {
     }
 
     @Override
+    @Cacheable(value = "caretakercache",key = "#userId")
     public CaretakerListResponse getMyCaretakers(String userId, Integer pageNo, Integer pageSize) throws UserCaretakerException {
         logger.info("Fetch user Caretakers : {}", userId);
         try {

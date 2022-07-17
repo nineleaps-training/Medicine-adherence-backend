@@ -12,6 +12,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MedicinePojo {
+
+    @Min(value = 10000)
     private int medicineId;
     @NotNull(message = "Days should not be null")
     @NotBlank(message = "Days should not be empty")

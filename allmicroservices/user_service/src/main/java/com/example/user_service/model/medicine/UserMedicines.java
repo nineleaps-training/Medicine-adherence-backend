@@ -10,6 +10,7 @@ import org.hibernate.validator.constraints.Range;
 
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 @Data
@@ -17,7 +18,7 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name = "user_medicine")
-public class UserMedicines {
+public class UserMedicines implements Serializable {
 
     @Id
     @Column(name = "medicine_id",nullable = false)
