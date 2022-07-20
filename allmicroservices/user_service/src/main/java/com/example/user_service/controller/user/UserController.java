@@ -13,6 +13,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import com.example.user_service.pojos.response.user.GetUsersresponse;
+import com.example.user_service.service.medicine.UserMedicineService;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -45,10 +46,13 @@ public class UserController {
     private final RabbitTemplate rabbitTemplate;
     private final JwtUtil jwtUtil;
 
-    UserController(UserService userService, JwtUtil jwtUtil, RabbitTemplate rabbitTemplate) {
+    private final UserMedicineService userMedicineService;
+
+    UserController(UserService userService, JwtUtil jwtUtil, RabbitTemplate rabbitTemplate, UserMedicineService userMedicineService) {
         this.jwtUtil = jwtUtil;
         this.userService = userService;
         this.rabbitTemplate = rabbitTemplate;
+        this.userMedicineService = userMedicineService;
     }
 
     // saving the user when they signup
@@ -129,7 +133,6 @@ public class UserController {
         List<UserEntity> user = Arrays.asList(userService.getUserById(userId));
         List<UserMedicines> list = user.get(0).getUserMedicines();
         UserProfileResponse userProfileResponse = new UserProfileResponse(Messages.SUCCESS, user, list);
-
         return new ResponseEntity<>(userProfileResponse, HttpStatus.OK);
     }
 

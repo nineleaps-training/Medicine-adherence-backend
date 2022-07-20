@@ -7,12 +7,13 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class MedicineResponse {
+public class MedicineResponse implements Serializable {
     private String status;
     private String message;
     private List<MedicineHistory> userMedicinesList;

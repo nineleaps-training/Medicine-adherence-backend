@@ -89,7 +89,7 @@ public class CaretakerController {
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     public ResponseEntity<CaretakerResponse> saveCaretaker(@Valid
-                                                           @RequestBody UserCaretakerDTO userCaretakerDTO, BindingResult bindingResult) throws UserCaretakerException {
+                                                           @RequestBody UserCaretakerDTO userCaretakerDTO, BindingResult bindingResult){
         if (bindingResult.hasErrors()) {
             return new ResponseEntity<>(new CaretakerResponse(Messages.FAILED,
                     Objects.requireNonNull(
@@ -98,13 +98,13 @@ public class CaretakerController {
                     HttpStatus.NOT_ACCEPTABLE);
         }
 
-        return new ResponseEntity<>(careTakerService.saveCareTaker(userCaretakerDTO), HttpStatus.OK);
+        return new ResponseEntity<>(careTakerService.saveCareTaker(userCaretakerDTO), HttpStatus.CREATED);
     }
 
     @PostMapping(value = "/image")
     @Transactional(timeout = 10)
     public ResponseEntity<SendImageResponse> sendImageToCaretaker(@Valid
-                                                                  @ModelAttribute SendImageDto sendImageDto, BindingResult bindingResult) throws IOException, UserCaretakerException {
+                                                                  @ModelAttribute SendImageDto sendImageDto, BindingResult bindingResult) throws IOException {
         if (bindingResult.hasErrors()) {
             return new ResponseEntity<>(new SendImageResponse(Messages.FAILED,
                     Objects.requireNonNull(
@@ -118,14 +118,14 @@ public class CaretakerController {
                 sendImageDto.getMedName(),
                 sendImageDto.getMedId());
 
-        return new ResponseEntity<>(sendImageResponse, HttpStatus.OK);
+        return new ResponseEntity<>(sendImageResponse, HttpStatus.CREATED);
     }
 
     // update request status if request is accepted or rejected
     @PutMapping(value = "/accept")
     public ResponseEntity<CaretakerResponse> updateCaretakerStatus(@NotNull
                                                                    @NotBlank
-                                                                   @RequestParam(name = "cId") String cId, BindingResult bindingResult) throws UserCaretakerException {
+                                                                   @RequestParam(name = "cId") String cId, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return new ResponseEntity<>(new CaretakerResponse(Messages.FAILED,
                     Objects.requireNonNull(
@@ -146,7 +146,7 @@ public class CaretakerController {
                                                                  @Min(value = 0)
                                                                  @RequestParam(name = "pageNo") Integer pageNo, @NotNull
                                                                  @Min(value = 1)
-                                                                 @RequestParam(name = "pageSize") Integer pageSize) throws UserCaretakerException {
+                                                                 @RequestParam(name = "pageSize") Integer pageSize){
         return new ResponseEntity<>(careTakerService.getMyCaretakers(userId, pageNo, pageSize), HttpStatus.OK);
     }
 
@@ -159,7 +159,7 @@ public class CaretakerController {
                                                                @RequestParam(name = "caretakerId") String userId, @RequestParam(name = "pageNo") Integer pageNo,
                                                                @RequestParam(name = "pageSize") Integer pageSize,
                                                                BindingResult bindingResult)
-            throws UserCaretakerException {
+            {
         if (bindingResult.hasErrors()) {
             return new ResponseEntity<>(new PatientResponse(Messages.FAILED,
                     Objects.requireNonNull(
@@ -178,7 +178,7 @@ public class CaretakerController {
                                                               @Size(max = 5)
                                                               @NotBlank String userId, @NotNull
                                                               @NotBlank Integer pageNo, @NotNull
-                                                              @NotBlank Integer pageSize, BindingResult bindingResult) throws UserCaretakerException {
+                                                              @NotBlank Integer pageSize, BindingResult bindingResult) {
         if ((bindingResult != null) && bindingResult.hasErrors()) {
             return new ResponseEntity<>(new PatientResponse(Messages.FAILED,
                     Objects.requireNonNull(

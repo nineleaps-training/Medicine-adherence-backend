@@ -5,27 +5,23 @@ import java.io.FileNotFoundException;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
-
-import org.hibernate.HibernateException;
+import com.example.user_service.pojos.response.auth.RefreshTokenResponse;
+import com.example.user_service.service.token.RefreshToken;
+import lombok.RequiredArgsConstructor;
 import org.hibernate.exception.JDBCConnectionException;
-
 import org.modelmapper.ModelMapper;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.scheduling.annotation.Async;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.HttpClientErrorException;
-
 import com.example.user_service.config.GoogleOauthCheck;
 import com.example.user_service.config.PdfMailSender;
-import com.example.user_service.exception.DataAccessExceptionMessage;
 import com.example.user_service.exception.user.GoogleSsoException;
 import com.example.user_service.exception.user.UserExceptionMessage;
 import com.example.user_service.model.medicine.MedicineHistory;
@@ -43,8 +39,11 @@ import com.example.user_service.repository.user.UserRepository;
 import com.example.user_service.util.Datehelper;
 import com.example.user_service.util.JwtUtil;
 import com.example.user_service.util.Messages;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Service
+@RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
     Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
     private final UserRepository userRepository;
@@ -55,20 +54,9 @@ public class UserServiceImpl implements UserService {
     private final JwtUtil jwtUtil;
     private final PasswordEncoder passwordEncoder;
     private final GoogleOauthCheck googleOauthCheck;
+    private final RefreshToken refreshToken;
 
-    public UserServiceImpl(UserRepository userRepository, UserMedicineRepository userMedicineRepository,
-                           UserDetailsRepository userDetailsRepository, PdfMailSender pdfMailSender,
-                           GoogleOauthCheck googleOauthCheck, PasswordEncoder passwordEncoder, JwtUtil jwtUtil,
-                           ModelMapper mapper) {
-        this.userRepository = userRepository;
-        this.userMedicineRepository = userMedicineRepository;
-        this.userDetailsRepository = userDetailsRepository;
-        this.pdfMailSender = pdfMailSender;
-        this.googleOauthCheck = googleOauthCheck;
-        this.passwordEncoder = passwordEncoder;
-        this.jwtUtil = jwtUtil;
-        this.mapper = mapper;
-    }
+
 
     @Override
     public UserResponse login(String mail, String fcmToken) throws UserExceptionMessage {
@@ -93,9 +81,8 @@ public class UserServiceImpl implements UserService {
                     new ArrayList<>(Arrays.asList(user)),
                     jwtToken,
                     refreshToken);
-        } catch (DataAccessException | HibernateException accessException) {
+        } catch (DataAccessException | JDBCConnectionException accessException) {
             com.example.user_service.config.log.Logger.errorLog(Messages.USER_SERVICE, accessException.getMessage());
-
             throw new UserExceptionMessage(Messages.ERROR_TRY_AGAIN + accessException.getMessage());
         }
     }
@@ -125,15 +112,22 @@ public class UserServiceImpl implements UserService {
             if (ue.get().getUserName() == null) {
                 throw new UserExceptionMessage(Messages.ERROR_TRY_AGAIN);
             }
+            com.example.user_service.model.Auth.RefreshToken refreshToken1 = refreshToken.createRefreshToken(ue.get().getUserName());
             return new UserResponse(Messages.SUCCESS,
                     Messages.SAVED_USER_SUCCESSFULLY,
                     new ArrayList<>(List.of(ue.get())),
-                    jwtUtil.generateToken(ue.get().getUserName()),
-                    passwordEncoder.encode(ue.get().getUserId()));
+                    jwtUtil.generateToken(ue.get().getUserName())
+                    ,refreshToken1.getToken()
+                    );
         } catch (JDBCConnectionException accessException) {
             com.example.user_service.config.log.Logger.errorLog(Messages.USER_SERVICE, accessException.getMessage());
             throw new UserExceptionMessage(Messages.ERROR_TRY_AGAIN + accessException.getMessage());
         }
+    }
+
+    @PostMapping(value = "/refreshToken")
+    public ResponseEntity<RefreshTokenResponse> getRefreshToken(@RequestParam(name = "userId") String userId){
+        return new ResponseEntity<>(null, HttpStatus.CREATED);
     }
 
     private void checkforUser(UserEntityDTO userEntityDTO) throws UserExceptionMessage {
@@ -171,12 +165,11 @@ public class UserServiceImpl implements UserService {
             value = "mailcache",
             key = "#email"
     )
-    public UserMailDto getUserByEmail(String email) throws UserExceptionMessage {
+    public UserMailDto getUserByEmail(String email)  {
         logger.info("Get User by mail : {}", email);
 
         try {
             UserMailDto userMailDto = userRepository.searchByMail(email);
-            System.out.println(userMailDto);
             return userMailDto;
         } catch (DataAccessException | JDBCConnectionException accessException) {
             com.example.user_service.config.log.Logger.errorLog(Messages.USER_SERVICE, accessException.getMessage());
@@ -187,8 +180,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Cacheable(
-            key = "#userId",
-            value = "usercache"
+            value = "usercache",
+            key = "#userId"
     )
     public UserEntity getUserById(String userId) throws UserExceptionMessage {
         logger.info("Get User Details :{}", userId);
@@ -204,7 +197,6 @@ public class UserServiceImpl implements UserService {
         } catch (DataAccessException | JDBCConnectionException accessException) {
             accessException.printStackTrace();
             com.example.user_service.config.log.Logger.errorLog(Messages.USER_SERVICE, accessException.getMessage());
-
             throw new UserExceptionMessage(Messages.ERROR_TRY_AGAIN);
         }
     }
@@ -227,11 +219,5 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-    public UserResponse getresponse(UserEntity userEntity) {
-        return new UserResponse(Messages.FAILED,
-                Messages.USER_ALREADY_PRESENT,
-                new ArrayList<>(List.of(userEntity)),
-                "",
-                "");
-    }
+
 }

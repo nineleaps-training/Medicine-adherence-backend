@@ -22,8 +22,6 @@ public class RedisConfig {
         RedisStandaloneConfiguration config = new RedisStandaloneConfiguration();
 
         config.setHostName("6379");
-
-        // config.setPassword(RedisPassword.of(password));
         return config;
     }
 
@@ -52,7 +50,7 @@ public class RedisConfig {
                                                                                   .entryTtl(Duration.ofMinutes(5)))
                                    .withCacheConfiguration("medicinecache",
                                                            RedisCacheConfiguration.defaultCacheConfig()
-                                                                                  .entryTtl(Duration.ofMinutes(2)))
+                                                                                  .entryTtl(Duration.ofMinutes(10)))
                                    .withCacheConfiguration("mailcache",
                                                            RedisCacheConfiguration.defaultCacheConfig()
                                                                                   .disableCachingNullValues()
@@ -60,9 +58,11 @@ public class RedisConfig {
                                    .withCacheConfiguration("caretakercache",
                                                            RedisCacheConfiguration.defaultCacheConfig()
                                                                                   .disableCachingNullValues()
+                                                                                  .entryTtl(Duration.ofMinutes(20)))
+                                   .withCacheConfiguration("medicinehistorycache",
+                                                           RedisCacheConfiguration.defaultCacheConfig()
+                                                                                  .disableCachingNullValues()
                                                                                   .entryTtl(Duration.ofMinutes(20)));
     }
 }
 
-
-//~ Formatted by Jindent --- http://www.jindent.com

@@ -42,11 +42,11 @@ public class MedicineController {
     public ResponseEntity<SyncResponse> syncData(@NotNull
     @NotBlank
     @RequestParam("userId") String userId, @RequestBody
-    @Valid List<MedicinePojo> medicinePojo, BindingResult bindingResult) throws UserMedicineException {
+    @Valid List<MedicinePojo> medicinePojo, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return new ResponseEntity<>(new SyncResponse(Messages.FAILED,
                                                          Objects.requireNonNull(
-                                                             bindingResult.getFieldError()).getDefaultMessage()),
+                                                             bindingResult.getFieldError()).getDefaultMessage(),null),
                                         HttpStatus.NOT_ACCEPTABLE);
         }
 
@@ -59,7 +59,7 @@ public class MedicineController {
         message = "Enter Valid Medicine Id"
     )
     @RequestParam(name = "medId") Integer medId, @Valid
-    @RequestBody List<MedicineHistoryDTO> medicineHistory, BindingResult bindingResult) throws UserMedicineException {
+    @RequestBody List<MedicineHistoryDTO> medicineHistory, BindingResult bindingResult){
         if (bindingResult.hasErrors()) {
             return new ResponseEntity<>(new SyncMedicineHistoryResponse(Messages.FAILED,
                                                                         Objects.requireNonNull(
@@ -75,14 +75,8 @@ public class MedicineController {
         value   = 1,
         message = "Enter Valid Id"
     )
-    @RequestParam(name = "medId") Integer medId, BindingResult bindingResult) throws UserMedicineException {
-        if (bindingResult.hasErrors()) {
-            return new ResponseEntity<>(new MedicineResponse(Messages.FAILED,
-                                                             Objects.requireNonNull(
-                                                                 bindingResult.getFieldError()).getDefaultMessage(),
-                                                             null),
-                                        HttpStatus.NOT_ACCEPTABLE);
-        }
+    @RequestParam(name = "medId") Integer medId)  {
+
 
         return new ResponseEntity<>(userMedicineService.getMedicineHistory(medId), HttpStatus.OK);
     }
@@ -92,7 +86,7 @@ public class MedicineController {
         value   = 1,
         message = "Enter valid medicine id"
     )
-    @RequestParam(name = "medId") Integer medId, BindingResult bindingResult) throws UserMedicineException {
+    @RequestParam(name = "medId") Integer medId, BindingResult bindingResult)  {
         if (bindingResult.hasErrors()) {
             return new ResponseEntity<>(new ImagesResponse(Messages.FAILED,
                                                            Objects.requireNonNull(
@@ -106,4 +100,3 @@ public class MedicineController {
 }
 
 
-//~ Formatted by Jindent --- http://www.jindent.com

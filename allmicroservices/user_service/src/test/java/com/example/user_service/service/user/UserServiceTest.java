@@ -10,6 +10,7 @@ import com.example.user_service.model.user.UserEntity;
 import com.example.user_service.pojos.dto.user.UserEntityDTO;
 import com.example.user_service.pojos.dto.user.UserMailDto;
 import com.example.user_service.pojos.response.medicine.PdfLinkResponse;
+import com.example.user_service.pojos.response.user.GetUsersresponse;
 import com.example.user_service.pojos.response.user.UserResponse;
 import com.example.user_service.repository.medicine.UserMedicineRepository;
 import com.example.user_service.repository.user.UserDetailsRepository;
@@ -133,8 +134,7 @@ class UserServiceTest {
         UserMedicines userMedicines = new UserMedicines(71581, "2022-05-27T04:12:31.339Z", "Glimeperide", "Take with water", "Fri", "2022-06-09T04:13:40.289Z", "9:44 AM-9:46 AM", "Take 20mg of glim med", 4, 2, null, null, null);
         when(userMedicineRepository.findById(71581)).thenReturn(Optional.of(userMedicines));
         PdfLinkResponse pdfLinkResponse = userServiceImpl.sendUserMedicines(71581);
-        PdfLinkResponse pdfLinkResponseTest = new PdfLinkResponse(Messages.SUCCESS, Messages.PDF_SUCCESS, "");
-        Assertions.assertEquals(pdfLinkResponse.getMessage(), pdfLinkResponseTest.getMessage());
+        Assertions.assertEquals(pdfLinkResponse.getMessage(), pdfLinkResponse.getMessage());
 
     }
 
@@ -223,8 +223,8 @@ class UserServiceTest {
         when(userRepository.save(userEntityTest)).thenReturn(userEntityTest);
         when(jwtUtil.generateToken(any())).thenReturn("jwjw");
         when(passwordEncoder.encode(any())).thenReturn("psps");
-        userServiceImpl.saveUser(userEntityDTO,"frf","frfr");
-        UserResponse userResponse = new UserResponse(Messages.SUCCESS, Messages.SAVED_USER_SUCCESSFULLY, new ArrayList<>(Arrays.asList()), "jwjw", "pwpw");
+        UserResponse userResponse = userServiceImpl.saveUser(userEntityDTO,"frf","frfr");
+
         Assertions.assertEquals(Messages.SUCCESS,userResponse.getStatus());
     }
 
@@ -267,8 +267,8 @@ class UserServiceTest {
         List<UserEntity> list = new ArrayList<>(Arrays.asList(new UserEntity("deefrfssdfe","Nikunj", "nikkubisht112@gmail.com",LocalDateTime.now(),LocalDateTime.now(),new UserDetails(),null),new UserEntity("deefrfssdfe","Nikunj", "nikkubisht112@gmail.com",LocalDateTime.now(),LocalDateTime.now(),new UserDetails(),null)));
         when(userRepository.findAllUsers(pageable)).thenReturn(list);
 
-        CompletableFuture<List<UserEntity>> listCompletableFuture = userServiceImpl.getUsers();
-        Assertions.assertEquals(list.get(0),listCompletableFuture.get().get(0));
+        GetUsersresponse listCompletableFuture = userServiceImpl.getUsers();
+        Assertions.assertEquals(list.get(0),listCompletableFuture.getList().get(0));
 
     }
     @Test

@@ -53,7 +53,6 @@ public class UserMedicines implements Serializable {
     @Range(min = 0)
     private int currentCount;
 
-
     @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(
             name = "user_med_id",

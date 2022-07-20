@@ -46,17 +46,15 @@ public class UserEntity implements Serializable {
 
     @OneToOne(
             cascade = CascadeType.ALL,
-            mappedBy = "user",
-            fetch = FetchType.LAZY
+            mappedBy = "user"
     )
+    @JsonIgnore
     private UserDetails userDetails;
 
 
     @OneToMany(
             cascade = CascadeType.ALL,
-            mappedBy = "userEntity",
-            fetch = FetchType.EAGER
-    )
+            mappedBy = "userEntity",fetch = FetchType.LAZY)
     @JsonIgnore
     private List<UserMedicines> userMedicines;
 

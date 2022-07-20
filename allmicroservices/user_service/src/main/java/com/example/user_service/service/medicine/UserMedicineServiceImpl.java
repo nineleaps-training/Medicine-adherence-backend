@@ -21,8 +21,9 @@ import com.example.user_service.util.Messages;
 import org.hibernate.exception.JDBCConnectionException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.dao.DataAccessException;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
@@ -50,25 +51,27 @@ public class UserMedicineServiceImpl implements UserMedicineService {
     }
 
     @Override
-    @Async
-    public UserMedicinesResponse getallUserMedicines(String userId) throws UserExceptionMessage, UserMedicineException {
+    @Cacheable(
+            value = "medicinecache",
+            key = "#userId"
+    )
+    public UserMedicinesResponse getallUserMedicines(String userId) {
         logger.info("Fetch medicines of a user : {}",userId);
         try {
-            UserEntity user = userRepository.getUserById(userId);
+            var user = userRepository.getUserById(userId);
             if (user == null) {
                 throw new UserExceptionMessage(Messages.USER_NOT_FOUND);
             }
-            List<UserMedicines> list = user.getUserMedicines();
+            var list = user.getUserMedicines();
             return new UserMedicinesResponse(Messages.SUCCESS, Messages.DATA_FOUND, CompletableFuture.completedFuture(list).get());
         } catch (JDBCConnectionException| InterruptedException | ExecutionException dataAccessException) {
             com.example.user_service.config.log.Logger.errorLog(Messages.MEDICINE_SERVICE, dataAccessException.getMessage());
-
             throw new UserMedicineException(Messages.ERROR_TRY_AGAIN);
         }
 
     }
     @Override
-    public SyncMedicineResponse syncData(String userId, List<UserMedicines> list) throws UserMedicineException {
+    public SyncMedicineResponse syncData(String userId, List<UserMedicines> list) {
         logger.info("Sync medicines for user : {}",userId);
         try {
             UserEntity user = userRepository.getUserById(userId);
@@ -90,8 +93,8 @@ public class UserMedicineServiceImpl implements UserMedicineService {
 
 
     @Override
-    @Async
-    public SyncMedicineHistoryResponse syncMedicineHistory(Integer medId, List<MedicineHistoryDTO> medicineHistoryDTOS) throws UserMedicineException {
+    @CacheEvict(value = "medicinehistorycache",key = "#medId")
+    public SyncMedicineHistoryResponse syncMedicineHistory(Integer medId, List<MedicineHistoryDTO> medicineHistoryDTOS) {
        logger.info("Sync Medicine History for medicine : {}",medId);
         try {
             UserMedicines userMedicines = userMedicineRepository.getMedById(medId);
@@ -115,14 +118,17 @@ public class UserMedicineServiceImpl implements UserMedicineService {
         } catch (DataAccessException | JDBCConnectionException
                 dataAccessException) {
             com.example.user_service.config.log.Logger.errorLog(Messages.MEDICINE_SERVICE, dataAccessException.getMessage());
-
             throw new UserMedicineException(Messages.ERROR_TRY_AGAIN);
         }
     }
 
 
     @Override
-    public MedicineResponse getMedicineHistory(Integer medId) throws UserMedicineException {
+    @Cacheable(
+      value = "medicinehistorycache",
+            key = "#medId"
+    )
+    public MedicineResponse getMedicineHistory(Integer medId)  {
 
         try {
             List<MedicineHistory> medicineHistories = userMedicineRepository.getMedById(medId).getMedicineHistories();
@@ -136,7 +142,7 @@ public class UserMedicineServiceImpl implements UserMedicineService {
     }
 
     @Override
-    public SyncResponse syncMedicines(String userId, List<MedicinePojo> medicinePojo) throws UserMedicineException {
+    public SyncResponse syncMedicines(String userId, List<MedicinePojo> medicinePojo) {
         try {
             UserEntity userEntity = userRepository.getUserById(userId);
 
@@ -159,15 +165,15 @@ public class UserMedicineServiceImpl implements UserMedicineService {
                     })
                     .collect(Collectors.toList());
 
-            userMedicineRepository.saveAll(userMedicinesList);
-            return new SyncResponse(Messages.SUCCESS, Messages.SYNC_SUCCESS);
+            var medicineRes =   userMedicineRepository.saveAll(userMedicinesList);
+            return new SyncResponse(Messages.SUCCESS, Messages.SYNC_SUCCESS,medicineRes);
         } catch (JDBCConnectionException exception) {
             throw new UserMedicineException(Messages.ERROR_TRY_AGAIN);
         }
     }
 
     @Override
-    public ImagesResponse getUserMedicineImages(Integer medId) throws UserMedicineException {
+    public ImagesResponse getUserMedicineImages(Integer medId) {
         logger.info("Get Imaages for medicine :{}",medId);
         try {
             UserMedicines userMedicines = userMedicineRepository.getMedById(medId);

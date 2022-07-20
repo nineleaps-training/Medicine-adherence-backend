@@ -77,9 +77,5 @@ public class RabbitmqConfiguration {
         rabbitTemplate.setMessageConverter(jsonMessageConverter());
         return rabbitTemplate;
     }
-
-
-
-
 }
-//
+
